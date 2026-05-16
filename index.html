@@ -1640,17 +1640,56 @@
     // Update top muscles
     function updateTopMuscles() {
       const weekWorkouts = getWeekWorkouts();
-      if (weekWorkouts.length === 0) return;
-      const muscleCounts = {};
+      
+      // Define your 6 target body parts
+      const targetMuscles = ['Back', 'Chest', 'Shoulders', 'Hamstrings', 'Quads', 'Arms'];
+      const hitMuscles = new Set();
+      
       weekWorkouts.forEach(w => {
-        muscleCounts[w.muscle] = (muscleCounts[w.muscle] || 0) + 1;
+        if (targetMuscles.includes(w.muscle)) {
+          hitMuscles.add(w.muscle);
+        }
       });
-      const html = Object.entries(muscleCounts).map(([muscle, count]) => `
-        <div style="margin-bottom: 0.75rem;">
-          <div style="font-weight: 500; color: var(--text-primary);">${muscle}</div>
-          <div style="font-size: 13px; color: var(--text-secondary);">${count} workout${count > 1 ? 's' : ''}</div>
+      
+      const completionPercentage = Math.round((hitMuscles.size / targetMuscles.length) * 100);
+      const allComplete = hitMuscles.size === targetMuscles.length;
+      
+      let html = `
+        <div style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div style="font-size: 14px; font-weight: 500; color: var(--text-primary);">Weekly Coverage</div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--accent);">${completionPercentage}%</div>
+          </div>
+          <div style="background: rgba(0,0,0,0.1); border-radius: 8px; height: 8px; overflow: hidden;">
+            <div style="background: ${allComplete ? 'var(--success)' : 'var(--accent)'}; height: 100%; width: ${completionPercentage}%; transition: width 0.3s ease;"></div>
+          </div>
         </div>
-      `).join('');
+      `;
+      
+      html += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">`;
+      
+      targetMuscles.forEach(muscle => {
+        const hit = hitMuscles.has(muscle);
+        const count = weekWorkouts.filter(w => w.muscle === muscle).length;
+        html += `
+          <div style="padding: 0.75rem; border-radius: 8px; background: ${hit ? 'var(--success-light)' : 'rgba(0,0,0,0.05)'}; border: 1px solid ${hit ? 'var(--success)' : 'rgba(0,0,0,0.1)'}; text-align: center;">
+            <div style="font-weight: 500; color: ${hit ? 'var(--success)' : 'var(--text-secondary)'}; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+              ${hit ? '✓' : '○'} ${muscle}
+            </div>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 0.25rem;">${count} ${count === 1 ? 'session' : 'sessions'}</div>
+          </div>
+        `;
+      });
+      
+      html += `</div>`;
+      
+      if (allComplete) {
+        html += `<div style="margin-top: 1rem; padding: 0.75rem; background: var(--success-light); border-radius: 8px; text-align: center; color: var(--success); font-weight: 500; font-size: 13px;">✓ Full body coverage this week!</div>`;
+      } else {
+        const missing = targetMuscles.filter(m => !hitMuscles.has(m));
+        html += `<div style="margin-top: 1rem; padding: 0.75rem; background: var(--warning-light); border-radius: 8px; text-align: center; color: var(--warning); font-weight: 500; font-size: 13px;">Missing this week: ${missing.join(', ')}</div>`;
+      }
+      
       document.getElementById('topMuscles').innerHTML = html;
     }
 
