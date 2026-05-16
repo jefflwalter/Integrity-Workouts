@@ -465,8 +465,62 @@
       font-size: 14px;
     }
 
-    .export-btn:hover {
-      opacity: 0.9;
+    .superset-group {
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .superset-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .superset-label::before {
+      content: '⚡';
+      font-size: 14px;
+    }
+
+    .superset-rest {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+      font-style: italic;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .superset-rest {
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .superset-rest-end {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 1rem;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .superset-rest-end {
+        background: rgba(0, 0, 0, 0.3);
+      }
     }
 
     .timeline {
@@ -691,6 +745,10 @@
               </div>
             </div>
 
+            <div class="superset-group">
+              <div class="superset-label">Superset</div>
+              <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
+              
             <div class="exercise-box">
               <h4>Single Arm High Row</h4>
               <div class="exercise-label">Program: 4 sets x 10 reps • 90 sec rest • 70 lbs</div>
@@ -807,6 +865,8 @@
                 <div class="previous-data" id="back_ex4_s4_prev"></div>
               </div>
             </div>
+            <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
+            </div>
 
             <div class="exercise-box">
               <h4>Cable Lat Pullover</h4>
@@ -916,6 +976,10 @@
               <div id="sh_ex2_history" class="history-text"></div>
             </div>
 
+            <div class="superset-group">
+              <div class="superset-label">Superset</div>
+              <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
+
             <div class="exercise-box">
               <h4>Arnold Twist Press</h4>
               <div class="exercise-label">Program: 4 Rounds x 10 reps • 30 sec between • 15 lbs</div>
@@ -967,6 +1031,12 @@
               </div>
               <div id="sh_ex5_history" class="history-text"></div>
             </div>
+            <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
+            </div>
+
+            <div class="superset-group">
+              <div class="superset-label">Superset</div>
+              <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
 
             <div class="exercise-box">
               <h4>V-Bar Cable Front Raise</h4>
@@ -1026,6 +1096,8 @@
                 </div>
               </div>
               <div id="sh_ex8_history" class="history-text"></div>
+            </div>
+            <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
             </div>
 
             <div class="form-group">
