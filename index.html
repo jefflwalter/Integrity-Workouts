@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Workout Tracker</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💪 Workout Tracker</title>
+    <style>
     :root {
       --card-bg: #ffffff;
       --card-border: #d3d1c7;
@@ -43,46 +37,37 @@
       }
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      color: var(--text-primary);
-      background: #f5f5f3;
-      padding: 1.5rem 1rem;
-      line-height: 1.6;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #0f0f0d;
-      }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
+      padding: 2rem;
     }
 
-    header {
+    .header {
       margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--card-border);
     }
 
-    h1 {
-      font-size: 28px;
-      font-weight: 600;
+    .header h1 {
+      font-size: 32px;
       margin-bottom: 0.5rem;
     }
 
-    h3 {
-      font-size: 16px;
-      font-weight: 500;
-    }
-
-    h4 {
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .subtitle {
+    .header p {
       color: var(--text-secondary);
       font-size: 14px;
     }
@@ -103,23 +88,21 @@
 
     .nav-tabs {
       display: flex;
-      gap: 0.5rem;
+      gap: 0;
+      border-bottom: 1px solid var(--card-border);
       margin-bottom: 2rem;
-      border-bottom: 0.5px solid var(--card-border);
-      overflow-x: auto;
-      padding-bottom: 1rem;
     }
 
     .tab-btn {
-      background: none;
+      padding: 1rem 1.5rem;
+      background: transparent;
       border: none;
-      padding: 0.75rem 1.25rem;
-      cursor: pointer;
-      font-size: 15px;
       color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
       border-bottom: 2px solid transparent;
-      transition: all 0.2s ease;
-      white-space: nowrap;
+      transition: all 0.3s ease;
     }
 
     .tab-btn:hover {
@@ -137,19 +120,6 @@
 
     .section.active {
       display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
     }
 
     .card {
@@ -157,6 +127,7 @@
       border: 0.5px solid var(--card-border);
       border-radius: 12px;
       padding: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
     .card h3 {
@@ -173,111 +144,29 @@
       line-height: 1.5;
     }
 
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
     .stat-value {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 600;
       color: var(--accent);
-      margin: 0.5rem 0;
+      margin-top: 0.5rem;
     }
 
-    .status-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 500;
-      margin-bottom: 0.75rem;
+    .empty-state {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-secondary);
     }
 
-    .status-badge.completed {
-      background: var(--success-light);
-      color: var(--success);
-    }
-
-    .status-badge.in-progress {
-      background: var(--info-light);
-      color: var(--info);
-    }
-
-    .status-badge.planned {
-      background: var(--warning-light);
-      color: var(--warning);
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 0.75rem;
-      border: 0.5px solid var(--card-border);
-      border-radius: 8px;
-      font-size: 14px;
-      background: var(--card-bg);
-      color: var(--text-primary);
-      font-family: inherit;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.1);
-    }
-
-    button {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    button:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-    }
-
-    .button-secondary {
-      background: var(--card-bg);
-      color: var(--text-primary);
-      border: 0.5px solid var(--card-border);
-    }
-
-    .button-secondary:hover {
-      background: #f5f5f3;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .form-row.two-col {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .workout-type-btn {
-      transition: all 0.2s ease;
-    }
-
-    .workout-type-btn.active {
-      background: var(--accent) !important;
-      color: white !important;
-      border-color: var(--accent) !important;
+    .chart-container {
+      position: relative;
+      height: 250px;
     }
 
     .workout-form {
@@ -288,19 +177,71 @@
       display: block;
     }
 
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-row.two-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 0.75rem;
+      border: 0.5px solid var(--card-border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+    }
+
     .exercise-box {
-      background: var(--accent-light);
+      background: rgba(255, 255, 255, 0.5);
+      border: 0.5px solid rgba(0, 0, 0, 0.1);
       border-radius: 8px;
-      padding: 1.5rem;
+      padding: 1rem;
       margin-bottom: 1.5rem;
-      border-left: 3px solid var(--accent);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .exercise-box {
+        background: rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .exercise-box h4 {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
     }
 
     .exercise-label {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-secondary);
       margin-bottom: 1rem;
-      line-height: 1.5;
     }
 
     .set-row {
@@ -433,36 +374,21 @@
       }
     }
 
-    .timer-btn {
-      padding: 0.75rem 1.5rem;
+    .export-btn {
+      width: 100%;
+      padding: 1rem;
       background: var(--accent);
       color: white;
       border: none;
       border-radius: 8px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s ease;
+      margin-top: 1rem;
       font-size: 14px;
     }
 
-    .timer-btn:hover {
+    .export-btn:hover {
       opacity: 0.9;
-    }
-
-    .timer-btn.stop {
-      background: #d32f2f;
-    }
-
-    .export-btn {
-      padding: 0.75rem 1.5rem;
-      background: var(--success);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 14px;
     }
 
     .superset-group {
@@ -524,22 +450,20 @@
     }
 
     .timeline {
-      margin-top: 1.5rem;
+      position: relative;
     }
 
     .timeline-item {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       padding-left: 24px;
       position: relative;
-      padding-bottom: 1rem;
-      border-left: 1px solid var(--card-border);
     }
 
     .timeline-item::before {
       content: '';
       position: absolute;
-      left: -7px;
-      top: 2px;
+      left: 4px;
+      top: 6px;
       width: 12px;
       height: 12px;
       border-radius: 50%;
@@ -547,916 +471,744 @@
     }
 
     .timeline-date {
-      font-size: 13px;
-      color: var(--text-secondary);
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .timeline-label {
       font-size: 15px;
       font-weight: 500;
+      margin-top: 0.25rem;
       color: var(--text-primary);
-      margin: 0.25rem 0;
     }
 
     .timeline-desc {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-secondary);
-      margin-top: 0.5rem;
+      margin-top: 0.25rem;
     }
 
-    .chart-container {
-      background: var(--card-bg);
-      border: 0.5px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .muscle-group-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .muscle-badge {
-      background: var(--accent-light);
-      color: var(--accent);
+    .status-badge {
+      display: inline-block;
       padding: 4px 10px;
       border-radius: 8px;
       font-size: 12px;
       font-weight: 500;
+      margin-bottom: 0.75rem;
     }
 
-    .empty-state {
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-secondary);
+    .status-badge.completed {
+      background: rgba(76, 175, 80, 0.15);
+      color: #2E7D32;
     }
-
-    .empty-state p {
-      margin: 0.5rem 0;
-    }
-
-    @media (max-width: 768px) {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>💪 Workout Tracker</h1>
-      <p class="subtitle">Track your progress, crush your goals</p>
-    </header>
+    <div class="container">
+        <div class="header">
+            <h1>💪 Workout Tracker</h1>
+            <p>Track your progress, crush your goals</p>
+        </div>
 
-    <div class="update-banner">
-      <strong>Last updated:</strong> <span id="lastUpdated">Today</span>
+        <div class="update-banner">
+            <strong>Last updated:</strong> <span id="lastUpdated">Today</span>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
+            <button class="tab-btn" onclick="switchTab('workouts')">Workouts</button>
+            <button class="tab-btn" onclick="switchTab('progress')">Progress</button>
+            <button class="tab-btn" onclick="switchTab('history')">History</button>
+        </div>
+
+        <!-- DASHBOARD TAB -->
+        <div id="dashboard" class="section active">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="margin: 0;">Dashboard</h2>
+                <button onclick="location.reload()" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500;">🔄 Refresh</button>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>This week</h3>
+                    <p>Total workouts</p>
+                    <div class="stat-value" id="weekWorkouts">0</div>
+                </div>
+                <div class="card">
+                    <h3>Current streak</h3>
+                    <p>Consecutive days</p>
+                    <div class="stat-value" id="streak">0</div>
+                </div>
+                <div class="card">
+                    <h3>Time spent</h3>
+                    <p>Total minutes</p>
+                    <div class="stat-value" id="totalTime">0</div>
+                </div>
+                <div class="card">
+                    <h3>Personal record</h3>
+                    <p>Heaviest lift</p>
+                    <div class="stat-value" id="pr">—</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Top muscle groups this week</h3>
+                <div id="topMuscles" class="empty-state">
+                    <p>Log workouts to see your top muscle groups</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Most recent workout</h3>
+                <div id="recentWorkout" class="empty-state">
+                    <p>No workouts yet. Start logging to see your most recent workout!</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Weekly summary</h3>
+                <div class="chart-container">
+                    <canvas id="weekChart" style="max-height: 200px;"></canvas>
+                    <div id="noChartData" style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                        Log some workouts to see your weekly summary
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WORKOUTS TAB -->
+        <div id="workouts" class="section">
+            <div style="margin-bottom: 1.5rem;">
+                <h3 style="margin-bottom: 1rem;">Select a workout</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <button onclick="selectWorkoutType('back')" id="backBtn" class="workout-type-btn active" style="flex: 1; padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 15px;">📍 Back Workout</button>
+                    <button onclick="selectWorkoutType('shoulders')" id="shouldersBtn" class="workout-type-btn" style="flex: 1; padding: 1rem; background: var(--card-bg); color: var(--text-primary); border: 0.5px solid var(--card-border); border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 15px;">💪 Shoulders Workout</button>
+                </div>
+            </div>
+
+            <!-- BACK WORKOUT FORM -->
+            <div id="backForm" class="workout-form active">
+                <form onsubmit="logBackWorkout(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="backDate">Date & Time</label>
+                            <input type="datetime-local" id="backDate" required>
+                        </div>
+                    </div>
+
+                    <div class="timer-section">
+                        <div class="timer-display" id="backTimer">00:00:00</div>
+                        <div class="timer-controls">
+                            <button type="button" id="backStartBtn" onclick="startTimer('back')" style="padding: 0.5rem 1rem; background: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">▶️ Start</button>
+                            <button type="button" id="backStopBtn" onclick="stopTimer('back')" style="padding: 0.5rem 1rem; background: #d32f2f; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; display: none;">⏹️ Stop</button>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h4>Small Neutral Grip Lat Pulldown</h4>
+                        <div class="exercise-label">Program: 4 sets x 6-10 reps • 90 sec rest • 140 lbs</div>
+                        
+                        <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex1_s1_reps" min="1" placeholder="Reps"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex1_s1_weight" step="0.5" value="140"></div>
+                            </div>
+                            <div class="previous-data" id="back_ex1_s1_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex1_s2_reps" min="1" placeholder="Reps"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex1_s2_weight" step="0.5" value="140"></div>
+                            </div>
+                            <div class="previous-data" id="back_ex1_s2_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex1_s3_reps" min="1" placeholder="Reps"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex1_s3_weight" step="0.5" value="140"></div>
+                            </div>
+                            <div class="previous-data" id="back_ex1_s3_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex1_s4_reps" min="1" placeholder="Reps"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex1_s4_weight" step="0.5" value="140"></div>
+                            </div>
+                            <div class="previous-data" id="back_ex1_s4_prev"></div>
+                        </div>
+                    </div>
+
+                    <div class="superset-group">
+                        <div class="superset-label">Superset</div>
+                        <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
+                        
+                        <div class="exercise-box">
+                            <h4>Single Arm High Row</h4>
+                            <div class="exercise-label">Program: 4 sets x 10 reps • 90 sec rest • 70 lbs</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex2_s1_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex2_s1_weight" step="0.5" value="70"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex2_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex2_s2_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex2_s2_weight" step="0.5" value="70"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex2_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex2_s3_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex2_s3_weight" step="0.5" value="70"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex2_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex2_s4_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex2_s4_weight" step="0.5" value="70"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex2_s4_prev"></div>
+                            </div>
+                        </div>
+
+                        <div class="exercise-box">
+                            <h4>Small Seated Cable Row</h4>
+                            <div class="exercise-label">Program: 4 sets x 12-15 reps • 90 sec rest • 80 lbs</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex3_s1_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex3_s1_weight" step="0.5" value="80"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex3_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex3_s2_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex3_s2_weight" step="0.5" value="80"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex3_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex3_s3_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex3_s3_weight" step="0.5" value="80"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex3_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex3_s4_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex3_s4_weight" step="0.5" value="80"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex3_s4_prev"></div>
+                            </div>
+                        </div>
+
+                        <div class="exercise-box">
+                            <h4>DB Single Arm Row</h4>
+                            <div class="exercise-label">Program: 4 sets x 10 reps • 90 sec rest • 40 lbs</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex4_s1_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex4_s1_weight" step="0.5" value="40"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex4_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex4_s2_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex4_s2_weight" step="0.5" value="40"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex4_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex4_s3_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex4_s3_weight" step="0.5" value="40"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex4_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex4_s4_reps" min="1" placeholder="Reps"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex4_s4_weight" step="0.5" value="40"></div>
+                                </div>
+                                <div class="previous-data" id="back_ex4_s4_prev"></div>
+                            </div>
+                        </div>
+                        <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h4>Cable Lat Pullover</h4>
+                        <div class="exercise-label">Program: 3 sets x 10 reps • 70 lbs</div>
+                        
+                        <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex5_s1_reps" min="1" placeholder="Reps"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex5_s1_weight" step="0.5" value="70"></div>
+                            </div>
+                            <div class="previous-data" id="back_ex5_s1_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex5_s2_reps" min="1" placeholder="Reps"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex5_s2_weight" step="0.5" value="70"></div>
+                            </div>
+                            <div class="previous-data" id="back_ex5_s2_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex5_s3_reps" min="1" placeholder="Reps"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex5_s3_weight" step="0.5" value="70"></div>
+                            </div>
+                            <div class="previous-data" id="back_ex5_s3_prev"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="backDuration">Total Duration (minutes)</label>
+                        <input type="number" id="backDuration" min="1" value="60">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="backNotes">Notes</label>
+                        <textarea id="backNotes" placeholder="How did it feel? Any observations?" style="height: 80px;"></textarea>
+                    </div>
+
+                    <button type="submit" style="width: 100%; padding: 1rem; font-size: 16px; font-weight: 600;">✓ Complete Back Workout</button>
+                </form>
+            </div>
+
+            <!-- SHOULDERS WORKOUT FORM -->
+            <div id="shouldersForm" class="workout-form">
+                <form onsubmit="logShouldersWorkout(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="shouldersDate">Date & Time</label>
+                            <input type="datetime-local" id="shouldersDate" required>
+                        </div>
+                    </div>
+
+                    <div class="timer-section">
+                        <div class="timer-display" id="shouldersTimer">00:00:00</div>
+                        <div class="timer-controls">
+                            <button type="button" id="shouldersStartBtn" onclick="startTimer('shoulders')" style="padding: 0.5rem 1rem; background: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">▶️ Start</button>
+                            <button type="button" id="shouldersStopBtn" onclick="stopTimer('shoulders')" style="padding: 0.5rem 1rem; background: #d32f2f; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; display: none;">⏹️ Stop</button>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h4>Knuckleout Shoulder Press</h4>
+                        <div class="exercise-label">Program: 4 sets x 8-12 reps • 90 sec rest • 25 lbs</div>
+                        
+                        <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s1_reps" min="1" placeholder="8-12"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s1_weight" step="0.5" value="25"></div>
+                            </div>
+                            <div class="previous-data" id="sh_ex1_s1_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s2_reps" min="1" placeholder="8-12"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s2_weight" step="0.5" value="25"></div>
+                            </div>
+                            <div class="previous-data" id="sh_ex1_s2_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s3_reps" min="1" placeholder="8-12"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s3_weight" step="0.5" value="25"></div>
+                            </div>
+                            <div class="previous-data" id="sh_ex1_s3_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s4_reps" min="1" placeholder="8-12"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s4_weight" step="0.5" value="25"></div>
+                            </div>
+                            <div class="previous-data" id="sh_ex1_s4_prev"></div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <h4>DB Side Lateral</h4>
+                        <div class="exercise-label">Program: 3 sets x 12-15 reps • 60 sec rest • 12 lbs</div>
+                        
+                        <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s1_reps" min="1" placeholder="12-15"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s1_weight" step="0.5" value="12"></div>
+                            </div>
+                            <div class="previous-data" id="sh_ex2_s1_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s2_reps" min="1" placeholder="12-15"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s2_weight" step="0.5" value="12"></div>
+                            </div>
+                            <div class="previous-data" id="sh_ex2_s2_prev"></div>
+                        </div>
+                        <div class="set-row">
+                            <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                            <div class="set-input-group">
+                                <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s3_reps" min="1" placeholder="12-15"></div>
+                                <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s3_weight" step="0.5" value="12"></div>
+                            </div>
+                            <div class="previous-data" id="sh_ex2_s3_prev"></div>
+                        </div>
+                    </div>
+
+                    <div class="superset-group">
+                        <div class="superset-label">Superset</div>
+                        <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
+
+                        <div class="exercise-box">
+                            <h4>Arnold Twist Press</h4>
+                            <div class="exercise-label">Program: 4 Rounds x 10 reps • 30 sec between • 15 lbs</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex3_s1_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex3_s1_weight" step="0.5" value="15"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex3_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex3_s2_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex3_s2_weight" step="0.5" value="15"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex3_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex3_s3_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex3_s3_weight" step="0.5" value="15"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex3_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex3_s4_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex3_s4_weight" step="0.5" value="15"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex3_s4_prev"></div>
+                            </div>
+                        </div>
+
+                        <div class="exercise-box">
+                            <h4>RB Side Lateral</h4>
+                            <div class="exercise-label">Program: 4 Rounds x 10 reps • Green band</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex4_s1_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex4_s1_weight" step="0.5" placeholder="Band"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex4_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex4_s2_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex4_s2_weight" step="0.5" placeholder="Band"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex4_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex4_s3_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex4_s3_weight" step="0.5" placeholder="Band"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex4_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex4_s4_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex4_s4_weight" step="0.5" placeholder="Band"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex4_s4_prev"></div>
+                            </div>
+                        </div>
+
+                        <div class="exercise-box">
+                            <h4>RB Front Raise</h4>
+                            <div class="exercise-label">Program: 4 Rounds x 10 reps • Green band</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex5_s1_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex5_s1_weight" step="0.5" placeholder="Band"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex5_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex5_s2_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex5_s2_weight" step="0.5" placeholder="Band"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex5_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex5_s3_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex5_s3_weight" step="0.5" placeholder="Band"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex5_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex5_s4_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex5_s4_weight" step="0.5" placeholder="Band"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex5_s4_prev"></div>
+                            </div>
+                        </div>
+                        <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
+                    </div>
+
+                    <div class="superset-group">
+                        <div class="superset-label">Superset</div>
+                        <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
+
+                        <div class="exercise-box">
+                            <h4>V-Bar Cable Front Raise</h4>
+                            <div class="exercise-label">Program: 4 Rounds x 8 reps • 20 lbs</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex6_s1_reps" min="1" placeholder="8"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex6_s1_weight" step="0.5" value="20"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex6_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex6_s2_reps" min="1" placeholder="8"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex6_s2_weight" step="0.5" value="20"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex6_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex6_s3_reps" min="1" placeholder="8"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex6_s3_weight" step="0.5" value="20"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex6_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex6_s4_reps" min="1" placeholder="8"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex6_s4_weight" step="0.5" value="20"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex6_s4_prev"></div>
+                            </div>
+                        </div>
+
+                        <div class="exercise-box">
+                            <h4>Cybex Shoulder Press</h4>
+                            <div class="exercise-label">Program: 4 Rounds x 8 reps • Seat 4 • 55 lbs</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex7_s1_reps" min="1" placeholder="8"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex7_s1_weight" step="0.5" value="55"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex7_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex7_s2_reps" min="1" placeholder="8"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex7_s2_weight" step="0.5" value="55"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex7_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex7_s3_reps" min="1" placeholder="8"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex7_s3_weight" step="0.5" value="55"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex7_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex7_s4_reps" min="1" placeholder="8"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex7_s4_weight" step="0.5" value="55"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex7_s4_prev"></div>
+                            </div>
+                        </div>
+
+                        <div class="exercise-box">
+                            <h4>Cable Side Lateral</h4>
+                            <div class="exercise-label">Program: 4 Rounds x 10/side reps • 10 lbs</div>
+                            
+                            <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex8_s1_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex8_s1_weight" step="0.5" value="10"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex8_s1_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex8_s2_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex8_s2_weight" step="0.5" value="10"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex8_s2_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex8_s3_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex8_s3_weight" step="0.5" value="10"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex8_s3_prev"></div>
+                            </div>
+                            <div class="set-row">
+                                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                                <div class="set-input-group">
+                                    <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex8_s4_reps" min="1" placeholder="10"></div>
+                                    <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex8_s4_weight" step="0.5" value="10"></div>
+                                </div>
+                                <div class="previous-data" id="sh_ex8_s4_prev"></div>
+                            </div>
+                        </div>
+                        <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shouldersDuration">Total Duration (minutes)</label>
+                        <input type="number" id="shouldersDuration" min="1" value="60">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shouldersNotes">Notes</label>
+                        <textarea id="shouldersNotes" placeholder="How did it feel? Any observations?" style="height: 80px;"></textarea>
+                    </div>
+
+                    <button type="submit" style="width: 100%; padding: 1rem; font-size: 16px; font-weight: 600;">✓ Complete Shoulders Workout</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- PROGRESS TAB -->
+        <div id="progress" class="section">
+            <h2>Progress</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>All-time volume</h3>
+                    <p>Total weight lifted</p>
+                    <div class="stat-value" id="totalVolume">0</div>
+                </div>
+                <div class="card">
+                    <h3>Avg workout</h3>
+                    <p>Duration</p>
+                    <div class="stat-value" id="avgDuration">0 min</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Personal records</h3>
+                <div id="prList" class="empty-state"><p>Log workouts to see your PRs</p></div>
+            </div>
+
+            <div class="card">
+                <h3>Strength progress</h3>
+                <div class="chart-container">
+                    <canvas id="progressChart" style="max-height: 300px;"></canvas>
+                    <div id="noProgressChart" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Log workouts to see your progress</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HISTORY TAB -->
+        <div id="history" class="section">
+            <h2>History</h2>
+            <div class="card">
+                <div class="timeline" id="historyTimeline"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
-      <button class="tab-btn" onclick="switchTab('workouts')">Workouts</button>
-      <button class="tab-btn" onclick="switchTab('progress')">Progress</button>
-      <button class="tab-btn" onclick="switchTab('history')">History</button>
-    </div>
-
-    <!-- DASHBOARD TAB -->
-    <div id="dashboard" class="section active">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-        <h2 style="margin: 0;">Dashboard</h2>
-        <button onclick="location.reload()" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500;">🔄 Refresh</button>
-      </div>
-
-      <div class="card">
-        <h3>Top muscle groups this week</h3>
-        <div id="topMuscles" class="empty-state">
-          <p>Log workouts to see your top muscle groups</p>
-        </div>
-      </div>
-
-      <div class="card-grid">
-        <div class="card">
-          <h3>This week</h3>
-          <p>Total workouts</p>
-          <div class="stat-value" id="weekWorkouts">0</div>
-        </div>
-        <div class="card">
-          <h3>Current streak</h3>
-          <p>Consecutive days</p>
-          <div class="stat-value" id="streak">0</div>
-        </div>
-        <div class="card">
-          <h3>Time spent</h3>
-          <p>Total minutes</p>
-          <div class="stat-value" id="totalTime">0</div>
-        </div>
-        <div class="card">
-          <h3>Personal record</h3>
-          <p>Heaviest lift</p>
-          <div class="stat-value" id="pr">—</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Most recent workout</h3>
-        <div id="recentWorkout" class="empty-state">
-          <p>No workouts yet. Start logging to see your most recent workout!</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Weekly summary</h3>
-        <div class="chart-container">
-          <canvas id="weekChart" style="max-height: 200px;"></canvas>
-          <div id="noChartData" style="text-align: center; color: var(--text-secondary); padding: 2rem;">
-            Log some workouts to see your weekly summary
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- WORKOUTS TAB -->
-    <div id="workouts" class="section">
-      <div style="margin-bottom: 1.5rem;">
-        <h3 style="margin-bottom: 1rem;">Select a workout</h3>
-        <div style="display: flex; gap: 1rem;">
-          <button onclick="selectWorkoutType('back')" id="backBtn" class="workout-type-btn active" style="flex: 1; padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 15px;">📍 Back Workout</button>
-          <button onclick="selectWorkoutType('shoulders')" id="shouldersBtn" class="workout-type-btn" style="flex: 1; padding: 1rem; background: var(--card-bg); color: var(--text-primary); border: 0.5px solid var(--card-border); border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 15px;">💪 Shoulders Workout</button>
-        </div>
-      </div>
-
-      <!-- BACK WORKOUT FORM -->
-      <div id="backForm" class="workout-form active">
-        <div class="card">
-          <h3>Back Workout Log</h3>
-          <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem;">
-            Enter today's weights and reps. Greyed text shows your previous workout.
-          </div>
-
-          <form onsubmit="logBackWorkout(event)">
-            <div class="form-group">
-              <label for="backDate">Date & Time</label>
-              <input type="datetime-local" id="backDate" required>
-            </div>
-
-            <div class="timer-section">
-              <div class="timer-display" id="backTimer">00:00:00</div>
-              <div class="timer-controls">
-                <button type="button" onclick="startTimer('back')" id="backStartBtn" class="timer-btn">▶️ Start</button>
-                <button type="button" onclick="stopTimer('back')" id="backStopBtn" class="timer-btn stop" style="display: none;">⏹️ Stop</button>
-              </div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>Small Neutral Grip Lat Pulldown</h4>
-              <div class="exercise-label">Program: 4 sets x 6-10 reps • 90 sec rest • 140 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex1_s1_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex1_s1_weight" step="0.5" value="140"></div>
-                </div>
-                <div class="previous-data" id="back_ex1_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex1_s2_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex1_s2_weight" step="0.5" value="140"></div>
-                </div>
-                <div class="previous-data" id="back_ex1_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex1_s3_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex1_s3_weight" step="0.5" value="140"></div>
-                </div>
-                <div class="previous-data" id="back_ex1_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex1_s4_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex1_s4_weight" step="0.5" value="140"></div>
-                </div>
-                <div class="previous-data" id="back_ex1_s4_prev"></div>
-              </div>
-            </div>
-
-            <div class="superset-group">
-              <div class="superset-label">Superset</div>
-              <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
-              
-            <div class="exercise-box">
-              <h4>Single Arm High Row</h4>
-              <div class="exercise-label">Program: 4 sets x 10 reps • 90 sec rest • 70 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex2_s1_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex2_s1_weight" step="0.5" value="70"></div>
-                </div>
-                <div class="previous-data" id="back_ex2_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex2_s2_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex2_s2_weight" step="0.5" value="70"></div>
-                </div>
-                <div class="previous-data" id="back_ex2_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex2_s3_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex2_s3_weight" step="0.5" value="70"></div>
-                </div>
-                <div class="previous-data" id="back_ex2_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex2_s4_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex2_s4_weight" step="0.5" value="70"></div>
-                </div>
-                <div class="previous-data" id="back_ex2_s4_prev"></div>
-              </div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>Small Seated Cable Row</h4>
-              <div class="exercise-label">Program: 4 sets x 12-15 reps • 90 sec rest • 80 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex3_s1_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex3_s1_weight" step="0.5" value="80"></div>
-                </div>
-                <div class="previous-data" id="back_ex3_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex3_s2_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex3_s2_weight" step="0.5" value="80"></div>
-                </div>
-                <div class="previous-data" id="back_ex3_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex3_s3_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex3_s3_weight" step="0.5" value="80"></div>
-                </div>
-                <div class="previous-data" id="back_ex3_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex3_s4_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex3_s4_weight" step="0.5" value="80"></div>
-                </div>
-                <div class="previous-data" id="back_ex3_s4_prev"></div>
-              </div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>DB Single Arm Row</h4>
-              <div class="exercise-label">Program: 4 sets x 10 reps • 90 sec rest • 40 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex4_s1_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex4_s1_weight" step="0.5" value="40"></div>
-                </div>
-                <div class="previous-data" id="back_ex4_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex4_s2_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex4_s2_weight" step="0.5" value="40"></div>
-                </div>
-                <div class="previous-data" id="back_ex4_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex4_s3_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex4_s3_weight" step="0.5" value="40"></div>
-                </div>
-                <div class="previous-data" id="back_ex4_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex4_s4_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex4_s4_weight" step="0.5" value="40"></div>
-                </div>
-                <div class="previous-data" id="back_ex4_s4_prev"></div>
-              </div>
-            </div>
-            <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>Cable Lat Pullover</h4>
-              <div class="exercise-label">Program: 3 sets x 10 reps • 70 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex5_s1_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex5_s1_weight" step="0.5" value="70"></div>
-                </div>
-                <div class="previous-data" id="back_ex5_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex5_s2_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex5_s2_weight" step="0.5" value="70"></div>
-                </div>
-                <div class="previous-data" id="back_ex5_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="back_ex5_s3_reps" min="1" placeholder="Reps"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="back_ex5_s3_weight" step="0.5" value="70"></div>
-                </div>
-                <div class="previous-data" id="back_ex5_s3_prev"></div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="backDuration">Total Duration (minutes)</label>
-              <input type="number" id="backDuration" min="1" value="60">
-            </div>
-
-            <div class="form-group">
-              <label for="backNotes">Notes</label>
-              <textarea id="backNotes" placeholder="How did it feel? Any observations?" style="height: 80px;"></textarea>
-            </div>
-
-            <button type="submit" style="width: 100%; padding: 1rem; font-size: 16px; font-weight: 600;">✓ Complete Back Workout</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- SHOULDERS WORKOUT FORM -->
-      <div id="shouldersForm" class="workout-form">
-        <div class="card">
-          <h3>Shoulders Workout Log</h3>
-          <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem;">
-            Enter today's weights and reps. Greyed text shows your previous workout.
-          </div>
-
-          <form onsubmit="logShouldersWorkout(event)">
-            <div class="form-group">
-              <label for="shouldersDate">Date & Time</label>
-              <input type="datetime-local" id="shouldersDate" required>
-            </div>
-
-            <div class="timer-section">
-              <div class="timer-display" id="shouldersTimer">00:00:00</div>
-              <div class="timer-controls">
-                <button type="button" onclick="startTimer('shoulders')" id="shouldersStartBtn" class="timer-btn">▶️ Start</button>
-                <button type="button" onclick="stopTimer('shoulders')" id="shouldersStopBtn" class="timer-btn stop" style="display: none;">⏹️ Stop</button>
-              </div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>Knuckleout Shoulder Press</h4>
-              <div class="exercise-label">Program: 4 sets x 8-12 reps • 90 sec rest • 25 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s1_reps" min="1" placeholder="8-12"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s1_weight" step="0.5" value="25"></div>
-                </div>
-                <div class="previous-data" id="sh_ex1_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s2_reps" min="1" placeholder="8-12"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s2_weight" step="0.5" value="25"></div>
-                </div>
-                <div class="previous-data" id="sh_ex1_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s3_reps" min="1" placeholder="8-12"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s3_weight" step="0.5" value="25"></div>
-                </div>
-                <div class="previous-data" id="sh_ex1_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s4_reps" min="1" placeholder="8-12"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s4_weight" step="0.5" value="25"></div>
-                </div>
-                <div class="previous-data" id="sh_ex1_s4_prev"></div>
-              </div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>DB Side Lateral</h4>
-              <div class="exercise-label">Program: 3 sets x 12-15 reps • 60 sec rest • 12 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s1_reps" min="1" placeholder="12-15"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s1_weight" step="0.5" value="12"></div>
-                </div>
-                <div class="previous-data" id="sh_ex2_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s2_reps" min="1" placeholder="12-15"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s2_weight" step="0.5" value="12"></div>
-                </div>
-                <div class="previous-data" id="sh_ex2_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s3_reps" min="1" placeholder="12-15"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s3_weight" step="0.5" value="12"></div>
-                </div>
-                <div class="previous-data" id="sh_ex2_s3_prev"></div>
-              </div>
-            </div>
-
-            <div class="superset-group">
-              <div class="superset-label">Superset</div>
-              <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
-
-            <div class="exercise-box">
-              <h4>Arnold Twist Press</h4>
-              <div class="exercise-label">Program: 4 Rounds x 10 reps • 30 sec between • 15 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex3_s1_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex3_s1_weight" step="0.5" value="15"></div>
-                </div>
-                <div class="previous-data" id="sh_ex3_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex3_s2_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex3_s2_weight" step="0.5" value="15"></div>
-                </div>
-                <div class="previous-data" id="sh_ex3_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex3_s3_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex3_s3_weight" step="0.5" value="15"></div>
-                </div>
-                <div class="previous-data" id="sh_ex3_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex3_s4_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex3_s4_weight" step="0.5" value="15"></div>
-                </div>
-                <div class="previous-data" id="sh_ex3_s4_prev"></div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>RB Side Lateral</h4>
-              <div class="exercise-label">Program: 4 Rounds x 10 reps • Green band</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex4_s1_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex4_s1_weight" step="0.5" placeholder="Band"></div>
-                </div>
-                <div class="previous-data" id="sh_ex4_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex4_s2_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex4_s2_weight" step="0.5" placeholder="Band"></div>
-                </div>
-                <div class="previous-data" id="sh_ex4_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex4_s3_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex4_s3_weight" step="0.5" placeholder="Band"></div>
-                </div>
-                <div class="previous-data" id="sh_ex4_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex4_s4_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex4_s4_weight" step="0.5" placeholder="Band"></div>
-                </div>
-                <div class="previous-data" id="sh_ex4_s4_prev"></div>
-              </div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>RB Front Raise</h4>
-              <div class="exercise-label">Program: 4 Rounds x 10 reps • Green band</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex5_s1_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex5_s1_weight" step="0.5" placeholder="Band"></div>
-                </div>
-                <div class="previous-data" id="sh_ex5_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex5_s2_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex5_s2_weight" step="0.5" placeholder="Band"></div>
-                </div>
-                <div class="previous-data" id="sh_ex5_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex5_s3_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex5_s3_weight" step="0.5" placeholder="Band"></div>
-                </div>
-                <div class="previous-data" id="sh_ex5_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex5_s4_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex5_s4_weight" step="0.5" placeholder="Band"></div>
-                </div>
-                <div class="previous-data" id="sh_ex5_s4_prev"></div>
-            </div>
-            <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
-            </div>
-
-            <div class="superset-group">
-              <div class="superset-label">Superset</div>
-              <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
-
-            <div class="exercise-box">
-              <h4>V-Bar Cable Front Raise</h4>
-              <div class="exercise-label">Program: 4 Rounds x 8 reps • 20 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex6_s1_reps" min="1" placeholder="8"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex6_s1_weight" step="0.5" value="20"></div>
-                </div>
-                <div class="previous-data" id="sh_ex6_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex6_s2_reps" min="1" placeholder="8"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex6_s2_weight" step="0.5" value="20"></div>
-                </div>
-                <div class="previous-data" id="sh_ex6_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex6_s3_reps" min="1" placeholder="8"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex6_s3_weight" step="0.5" value="20"></div>
-                </div>
-                <div class="previous-data" id="sh_ex6_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex6_s4_reps" min="1" placeholder="8"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex6_s4_weight" step="0.5" value="20"></div>
-                </div>
-                <div class="previous-data" id="sh_ex6_s4_prev"></div>
-              </div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>Cybex Shoulder Press</h4>
-              <div class="exercise-label">Program: 4 Rounds x 8 reps • Seat 4 • 55 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex7_s1_reps" min="1" placeholder="8"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex7_s1_weight" step="0.5" value="55"></div>
-                </div>
-                <div class="previous-data" id="sh_ex7_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex7_s2_reps" min="1" placeholder="8"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex7_s2_weight" step="0.5" value="55"></div>
-                </div>
-                <div class="previous-data" id="sh_ex7_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex7_s3_reps" min="1" placeholder="8"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex7_s3_weight" step="0.5" value="55"></div>
-                </div>
-                <div class="previous-data" id="sh_ex7_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex7_s4_reps" min="1" placeholder="8"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex7_s4_weight" step="0.5" value="55"></div>
-                </div>
-                <div class="previous-data" id="sh_ex7_s4_prev"></div>
-            </div>
-
-            <div class="exercise-box">
-              <h4>Cable Side Lateral</h4>
-              <div class="exercise-label">Program: 4 Rounds x 10/side reps • 10 lbs</div>
-              
-              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex8_s1_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex8_s1_weight" step="0.5" value="10"></div>
-                </div>
-                <div class="previous-data" id="sh_ex8_s1_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex8_s2_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex8_s2_weight" step="0.5" value="10"></div>
-                </div>
-                <div class="previous-data" id="sh_ex8_s2_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex8_s3_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex8_s3_weight" step="0.5" value="10"></div>
-                </div>
-                <div class="previous-data" id="sh_ex8_s3_prev"></div>
-              </div>
-              <div class="set-row">
-                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
-                <div class="set-input-group">
-                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex8_s4_reps" min="1" placeholder="10"></div>
-                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex8_s4_weight" step="0.5" value="10"></div>
-                </div>
-                <div class="previous-data" id="sh_ex8_s4_prev"></div>
-              </div>
-            </div>
-            <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
-            </div>
-
-            <div class="form-group">
-              <label for="shouldersDuration">Total Duration (minutes)</label>
-              <input type="number" id="shouldersDuration" min="1" value="60">
-            </div>
-
-            <div class="form-group">
-              <label for="shouldersNotes">Notes</label>
-              <textarea id="shouldersNotes" placeholder="How did it feel? Any observations?" style="height: 80px;"></textarea>
-            </div>
-
-            <button type="submit" style="width: 100%; padding: 1rem; font-size: 16px; font-weight: 600;">✓ Complete Shoulders Workout</button>
-          </form>
-        </div>
-      </div>
-
-      <div style="margin-top: 2rem; margin-bottom: 2rem;">
-        <button onclick="downloadWorkoutReport()" class="export-btn" style="width: 100%; padding: 1rem; font-size: 16px; font-weight: 600;">📊 Download Workout Report</button>
-      </div>
-
-      <div id="workoutsList" style="margin-top: 2rem;">
-        <h3 style="margin-bottom: 1rem;">Recent workouts</h3>
-        <div id="recentList" class="empty-state">
-          <p>No workouts logged yet. Select a workout and log it above!</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROGRESS TAB -->
-    <div id="progress" class="section">
-      <div class="card">
-        <h3>Strength progress</h3>
-        <div class="chart-container">
-          <canvas id="progressChart" style="max-height: 300px;"></canvas>
-          <div id="noProgressData" style="text-align: center; color: var(--text-secondary); padding: 2rem;">
-            Log weighted exercises to track strength progress
-          </div>
-        </div>
-      </div>
-
-      <div class="card-grid">
-        <div class="card">
-          <h3>Total weight lifted</h3>
-          <p>All time</p>
-          <div class="stat-value" id="totalWeight">0 lbs</div>
-        </div>
-        <div class="card">
-          <h3>Average duration</h3>
-          <p>Per workout</p>
-          <div class="stat-value" id="avgDuration">0 min</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Personal records by exercise</h3>
-        <div id="prList" class="empty-state">
-          <p>Log weighted workouts to see your personal records</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- HISTORY TAB -->
-    <div id="history" class="section">
-      <div class="card">
-        <h3>Workout history</h3>
-        <div class="timeline" id="historyTimeline">
-          <div class="empty-state">
-            <p>No workouts logged yet. Your history will appear here.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
+    <script>
     const STORAGE_KEY = 'workoutTrackerData';
     let workouts = [];
-    
-    // Timer variables
-    let timerIntervals = { back: null, shoulders: null };
     let timerSeconds = { back: 0, shoulders: 0 };
+    let timerIntervals = { back: null, shoulders: null };
     let timerActive = { back: false, shoulders: false };
 
-    // Load data from localStorage
-    function loadData() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        workouts = JSON.parse(saved);
-      }
-      setDefaultDates();
-      updateHistoryDisplay();
-      updateAllDashboards();
-    }
-
-    // Save data to localStorage
-    function saveData() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(workouts));
-      updateLastUpdated();
-    }
-
-    // Update last updated time
-    function updateLastUpdated() {
-      const options = { month: 'short', day: 'numeric', year: 'numeric' };
-      const today = new Date().toLocaleDateString('en-US', options);
-      document.getElementById('lastUpdated').textContent = today;
-    }
-
-    // Set default dates
-    function setDefaultDates() {
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const day = String(now.getDate()).padStart(2, '0');
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const dateString = `${year}-${month}-${day}T${hours}:${minutes}`;
-      
-      document.getElementById('backDate').value = dateString;
-      document.getElementById('shouldersDate').value = dateString;
-    }
-
-    // Timer Functions
-    function formatTime(seconds) {
-      const hours = Math.floor(seconds / 3600);
-      const minutes = Math.floor((seconds % 3600) / 60);
-      const secs = seconds % 60;
-      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-    }
-
-    function startTimer(type) {
-      if (timerActive[type]) return;
-      
-      timerActive[type] = true;
-      document.getElementById(type + 'StartBtn').style.display = 'none';
-      document.getElementById(type + 'StopBtn').style.display = 'inline-block';
-      
-      timerIntervals[type] = setInterval(() => {
-        timerSeconds[type]++;
-        document.getElementById(type + 'Timer').textContent = formatTime(timerSeconds[type]);
-      }, 1000);
-    }
-
-    function stopTimer(type) {
-      if (!timerActive[type]) return;
-      
-      timerActive[type] = false;
-      clearInterval(timerIntervals[type]);
-      document.getElementById(type + 'StartBtn').style.display = 'inline-block';
-      document.getElementById(type + 'StopBtn').style.display = 'none';
-    }
-
-    // Export Report Function
-    function downloadWorkoutReport() {
-      if (workouts.length === 0) {
-        alert('No workouts to export yet!');
-        return;
-      }
-
-      let csv = 'Date,Workout,Exercise,Performance,Duration,Notes\n';
-      
-      workouts.forEach(w => {
-        const date = new Date(w.date);
-        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
-        
-        w.exercises.forEach(ex => {
-          let performance = '';
-          
-          if (ex.sets && Array.isArray(ex.sets)) {
-            // For Back (set-by-set format)
-            const repsArray = ex.sets.map(s => s.reps).filter(r => r);
-            const weightsArray = ex.sets.map(s => s.weight).filter(w => w);
-            
-            if (repsArray.length > 0 && weightsArray.length > 0) {
-              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps @ ${weightsArray[0]} lbs`;
-            } else if (repsArray.length > 0) {
-              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps`;
-            }
-          } else if (ex.sets || ex.reps || ex.weight) {
-            // For Shoulders (simple format)
-            const parts = [];
-            if (ex.sets) parts.push(`${ex.sets}×${ex.reps}`);
-            if (ex.weight) parts.push(`${ex.weight} lbs`);
-            performance = parts.join(' @ ');
-          }
-          
-          if (performance) {
-            csv += `${dateStr},"${w.muscle}","${ex.name}","${performance}",${w.duration},"${w.notes || ''}"\n`;
-          }
-        });
-      });
-
-      // Create and download CSV file
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Workout_Report_${new Date().toLocaleDateString('en-US').replace(/\//g, '-')}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    }
-
-    // Switch between tabs
     function switchTab(tabName) {
       const sections = document.querySelectorAll('.section');
       sections.forEach(s => s.classList.remove('active'));
@@ -1468,25 +1220,19 @@
       event.target.classList.add('active');
     }
 
-    // Select workout type
     function selectWorkoutType(type) {
-      document.getElementById('backForm').classList.remove('active');
-      document.getElementById('shouldersForm').classList.remove('active');
-      document.getElementById('backBtn').classList.remove('active');
-      document.getElementById('shouldersBtn').classList.remove('active');
+      document.getElementById('backForm').classList.toggle('active', type === 'back');
+      document.getElementById('shouldersForm').classList.toggle('active', type === 'shoulders');
       
-      if (type === 'back') {
-        document.getElementById('backForm').classList.add('active');
-        document.getElementById('backBtn').classList.add('active');
-      } else {
-        document.getElementById('shouldersForm').classList.add('active');
-        document.getElementById('shouldersBtn').classList.add('active');
-      }
+      document.getElementById('backBtn').style.background = type === 'back' ? 'var(--accent)' : 'var(--card-bg)';
+      document.getElementById('backBtn').style.color = type === 'back' ? 'white' : 'var(--text-primary)';
+      document.getElementById('backBtn').style.border = type === 'back' ? 'none' : '0.5px solid var(--card-border)';
       
-      updateHistoryDisplay();
+      document.getElementById('shouldersBtn').style.background = type === 'shoulders' ? 'var(--accent)' : 'var(--card-bg)';
+      document.getElementById('shouldersBtn').style.color = type === 'shoulders' ? 'white' : 'var(--text-primary)';
+      document.getElementById('shouldersBtn').style.border = type === 'shoulders' ? 'none' : '0.5px solid var(--card-border)';
     }
 
-    // Log Back Workout
     function logBackWorkout(e) {
       e.preventDefault();
       
@@ -1560,7 +1306,6 @@
       alert('Back workout logged successfully! 💪');
     }
 
-    // Log Shoulders Workout
     function logShouldersWorkout(e) {
       e.preventDefault();
       
@@ -1661,47 +1406,12 @@
       alert('Shoulders workout logged successfully! 💪');
     }
 
-    // Update history display with previous workout data
-    function updateHistoryDisplay() {
-      const isBackForm = document.getElementById('backForm').classList.contains('active');
-      const backExercises = [
-        'Small Neutral Grip Lat Pulldown', 'Single Arm High Row', 'Small Seated Cable Row', 
-        'DB Single Arm Row', 'Cable Lat Pullover'
-      ];
-      const exercises = isBackForm ? backExercises : [];
-      
-      exercises.forEach((exerciseName, exIdx) => {
-        const relevantWorkouts = workouts.filter(w => 
-          w.exercises && w.exercises.some(ex => ex.name === exerciseName)
-        );
-        
-        if (relevantWorkouts.length > 0) {
-          const lastWorkout = relevantWorkouts[0];
-          const lastExercise = lastWorkout.exercises.find(ex => ex.name === exerciseName);
-          
-          if (lastExercise && lastExercise.sets) {
-            const prefix = `back_ex${exIdx + 1}`;
-            lastExercise.sets.forEach((set, setIdx) => {
-              const prevEl = document.getElementById(`${prefix}_s${setIdx + 1}_prev`);
-              if (prevEl && set.reps) {
-                const prevText = `${set.reps}${set.weight ? ' @ ' + set.weight + ' lbs' : ''}`;
-                prevEl.textContent = `← ${prevText}`;
-                prevEl.style.opacity = '0.6';
-              }
-            });
-          }
-        }
-      });
-    }
-
-    // Get workouts from this week
     function getWeekWorkouts() {
       const now = new Date();
       const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
       return workouts.filter(w => new Date(w.date) >= weekAgo);
     }
 
-    // Calculate streak
     function calculateStreak() {
       if (workouts.length === 0) return 0;
       let streak = 0;
@@ -1713,30 +1423,18 @@
         const workoutDate = new Date(workout.date);
         workoutDate.setHours(0, 0, 0, 0);
         const diff = (currentDate - workoutDate) / (1000 * 60 * 60 * 24);
-        if (diff <= 1) {
+        
+        if (diff === 0 || diff === 1) {
           streak++;
-          currentDate = new Date(workoutDate);
-          currentDate.setDate(currentDate.getDate() - 1);
+          currentDate = workoutDate;
         } else {
           break;
         }
       }
+      
       return streak;
     }
 
-    // Update all dashboards
-    function updateAllDashboards() {
-      updateDashboardStats();
-      updateRecentWorkout();
-      updateWeekChart();
-      updateTopMuscles();
-      updateRecentList();
-      updateProgressStats();
-      updatePRList();
-      updateHistoryTimeline();
-    }
-
-    // Update dashboard stats
     function updateDashboardStats() {
       const weekWorkouts = getWeekWorkouts();
       document.getElementById('weekWorkouts').textContent = weekWorkouts.length;
@@ -1747,73 +1445,21 @@
       
       let maxWeight = 0;
       workouts.forEach(w => {
-        if (w.exercises) {
-          w.exercises.forEach(ex => {
-            if (ex.weight) maxWeight = Math.max(maxWeight, parseFloat(ex.weight));
-          });
-        }
+        w.exercises.forEach(ex => {
+          if (ex.sets && Array.isArray(ex.sets)) {
+            ex.sets.forEach(set => {
+              if (set.weight && parseInt(set.weight) > maxWeight) {
+                maxWeight = parseInt(set.weight);
+              }
+            });
+          }
+        });
       });
-      document.getElementById('pr').textContent = maxWeight ? maxWeight + ' lbs' : '—';
+      document.getElementById('pr').textContent = maxWeight > 0 ? maxWeight + ' lbs' : '—';
     }
 
-    // Update recent workout
-    function updateRecentWorkout() {
-      if (workouts.length === 0) return;
-      const recent = workouts[0];
-      const date = new Date(recent.date);
-      const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-      
-      const exercisesList = recent.exercises.map(ex => ex.name).join(' • ');
-      document.getElementById('recentWorkout').innerHTML = `
-        <div class="status-badge completed">Most recent</div>
-        <div class="timeline-label">${recent.muscle} Workout</div>
-        <div class="timeline-date">${dateStr}</div>
-        <div style="color: var(--text-secondary); font-size: 14px; margin-top: 0.75rem;">${recent.duration} min • ${recent.exercises.length} exercises</div>
-        ${recent.notes ? `<div style="color: var(--text-secondary); font-size: 14px; margin-top: 0.75rem; font-style: italic;">"${recent.notes}"</div>` : ''}
-      `;
-    }
-
-    // Update week chart
-    function updateWeekChart() {
-      const weekWorkouts = getWeekWorkouts();
-      if (weekWorkouts.length === 0) {
-        document.getElementById('weekChart').style.display = 'none';
-        return;
-      }
-      document.getElementById('noChartData').style.display = 'none';
-      const workoutCounts = { 'Back': 0, 'Shoulders': 0 };
-      weekWorkouts.forEach(w => {
-        if (w.muscle) workoutCounts[w.muscle]++;
-      });
-      
-      const ctx = document.getElementById('weekChart');
-      if (ctx.chart) ctx.chart.destroy();
-      ctx.chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: Object.keys(workoutCounts),
-          datasets: [{
-            label: 'Workouts',
-            data: Object.values(workoutCounts),
-            backgroundColor: '#185FA5',
-            borderRadius: 8,
-            borderSkipped: false
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true } }
-        }
-      });
-    }
-
-    // Update top muscles
     function updateTopMuscles() {
       const weekWorkouts = getWeekWorkouts();
-      
-      // Define your 6 target body parts
       const targetMuscles = ['Back', 'Chest', 'Shoulders', 'Hamstrings', 'Quads', 'Arms'];
       const hitMuscles = new Set();
       
@@ -1833,19 +1479,19 @@
             <div style="font-size: 18px; font-weight: 600; color: var(--accent);">${completionPercentage}%</div>
           </div>
           <div style="background: rgba(0,0,0,0.1); border-radius: 8px; height: 8px; overflow: hidden;">
-            <div style="background: ${allComplete ? 'var(--success)' : 'var(--accent)'}; height: 100%; width: ${completionPercentage}%; transition: width 0.3s ease;"></div>
+            <div style="background: ${allComplete ? '#4CAF50' : 'var(--accent)'}; height: 100%; width: ${completionPercentage}%; transition: width 0.3s ease;"></div>
           </div>
         </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
       `;
-      
-      html += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">`;
       
       targetMuscles.forEach(muscle => {
         const hit = hitMuscles.has(muscle);
         const count = weekWorkouts.filter(w => w.muscle === muscle).length;
         html += `
-          <div style="padding: 0.75rem; border-radius: 8px; background: ${hit ? 'var(--success-light)' : 'rgba(0,0,0,0.05)'}; border: 1px solid ${hit ? 'var(--success)' : 'rgba(0,0,0,0.1)'}; text-align: center;">
-            <div style="font-weight: 500; color: ${hit ? 'var(--success)' : 'var(--text-secondary)'}; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+          <div style="padding: 0.75rem; border-radius: 8px; background: ${hit ? 'rgba(76, 175, 80, 0.15)' : 'rgba(0,0,0,0.05)'}; border: 1px solid ${hit ? '#4CAF50' : 'rgba(0,0,0,0.1)'}; text-align: center;">
+            <div style="font-weight: 500; color: ${hit ? '#2E7D32' : 'var(--text-secondary)'}; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
               ${hit ? '✓' : '○'} ${muscle}
             </div>
             <div style="font-size: 13px; color: var(--text-secondary); margin-top: 0.25rem;">${count} ${count === 1 ? 'session' : 'sessions'}</div>
@@ -1856,81 +1502,173 @@
       html += `</div>`;
       
       if (allComplete) {
-        html += `<div style="margin-top: 1rem; padding: 0.75rem; background: var(--success-light); border-radius: 8px; text-align: center; color: var(--success); font-weight: 500; font-size: 13px;">✓ Full body coverage this week!</div>`;
+        html += `<div style="padding: 0.75rem; background: rgba(76, 175, 80, 0.15); border-radius: 8px; text-align: center; color: #2E7D32; font-weight: 500; font-size: 13px; border: 1px solid #4CAF50;">✓ Full body coverage this week!</div>`;
       } else {
         const missing = targetMuscles.filter(m => !hitMuscles.has(m));
-        html += `<div style="margin-top: 1rem; padding: 0.75rem; background: var(--warning-light); border-radius: 8px; text-align: center; color: var(--warning); font-weight: 500; font-size: 13px;">Missing this week: ${missing.join(', ')}</div>`;
+        html += `<div style="padding: 0.75rem; background: rgba(255, 193, 7, 0.15); border-radius: 8px; text-align: center; color: #FFC107; font-weight: 500; font-size: 13px; border: 1px solid #FFC107;">Missing this week: ${missing.join(', ')}</div>`;
       }
       
       document.getElementById('topMuscles').innerHTML = html;
     }
 
-    // Update recent list
-    function updateRecentList() {
+    function updateRecentWorkout() {
       if (workouts.length === 0) {
-        document.getElementById('recentList').innerHTML = '<div class="empty-state"><p>No workouts logged yet. Select a workout and log it above!</p></div>';
+        document.getElementById('recentWorkout').innerHTML = '<div class="empty-state"><p>No workouts yet. Start logging to see your most recent workout!</p></div>';
         return;
       }
-      const html = workouts.slice(0, 8).map(w => {
-        const date = new Date(w.date);
-        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        return `
-          <div class="card" style="margin-bottom: 1rem;">
-            <div class="status-badge completed">${w.muscle}</div>
-            <h3 style="margin: 0.5rem 0;">${w.muscle} Workout</h3>
-            <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 0.5rem;">${dateStr} • ${w.duration} min • ${w.exercises.length} exercises</div>
-            ${w.notes ? `<p style="font-style: italic; margin: 0;">"${w.notes}"</p>` : ''}
-          </div>
-        `;
-      }).join('');
-      document.getElementById('recentList').innerHTML = html;
+      
+      const recent = workouts[0];
+      const date = new Date(recent.date);
+      const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      
+      const exerciseList = recent.exercises.map(e => e.name).join(', ');
+      
+      document.getElementById('recentWorkout').innerHTML = `
+        <div style="text-align: left;">
+          <div class="status-badge completed">${recent.muscle}</div>
+          <h4 style="margin: 0.5rem 0;">${recent.muscle} Workout</h4>
+          <p style="color: var(--text-secondary); font-size: 13px; margin: 0;">${dateStr} at ${timeStr}</p>
+          <p style="color: var(--text-secondary); font-size: 13px; margin: 0.5rem 0;">${recent.duration} min • ${recent.exercises.length} exercises</p>
+          <p style="color: var(--text-secondary); font-size: 13px; margin: 0;">${exerciseList}</p>
+        </div>
+      `;
     }
 
-    // Update progress stats
-    function updateProgressStats() {
-      const totalWeight = workouts.reduce((sum, w) => {
-        if (w.exercises) {
-          return sum + w.exercises.reduce((es, ex) => es + (ex.weight ? parseFloat(ex.weight) * parseInt(ex.sets) * parseInt(ex.reps) : 0), 0);
+    function updateWeekChart() {
+      const weekWorkouts = getWeekWorkouts();
+      const today = new Date();
+      const chartData = {};
+      
+      for (let i = 6; i >= 0; i--) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        chartData[dateStr] = 0;
+      }
+      
+      weekWorkouts.forEach(w => {
+        const date = new Date(w.date);
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        if (dateStr in chartData) {
+          chartData[dateStr]++;
         }
-        return sum;
+      });
+      
+      const labels = Object.keys(chartData);
+      const data = Object.values(chartData);
+      
+      const canvas = document.getElementById('weekChart');
+      const noData = document.getElementById('noChartData');
+      
+      if (data.some(d => d > 0)) {
+        canvas.style.display = 'block';
+        noData.style.display = 'none';
+        
+        if (window.weekChart) {
+          window.weekChart.destroy();
+        }
+        
+        window.weekChart = new Chart(canvas, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Workouts',
+              data: data,
+              backgroundColor: 'var(--accent)',
+              borderRadius: 8,
+              borderSkipped: false
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 3,
+                ticks: { color: 'var(--text-secondary)' },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+              },
+              x: {
+                ticks: { color: 'var(--text-secondary)' },
+                grid: { display: false }
+              }
+            }
+          }
+        });
+      } else {
+        canvas.style.display = 'none';
+        noData.style.display = 'block';
+      }
+    }
+
+    function updateProgressStats() {
+      const totalVolume = workouts.reduce((sum, w) => {
+        let weight = 0;
+        w.exercises.forEach(ex => {
+          if (ex.sets && Array.isArray(ex.sets)) {
+            ex.sets.forEach(set => {
+              weight += (parseInt(set.weight) || 0) * (parseInt(set.reps) || 0);
+            });
+          }
+        });
+        return sum + weight;
       }, 0);
-      document.getElementById('totalWeight').textContent = Math.round(totalWeight).toLocaleString() + ' lbs';
+      
+      document.getElementById('totalVolume').textContent = totalVolume + ' lbs';
       
       const avgDuration = workouts.length > 0 ? Math.round(workouts.reduce((sum, w) => sum + parseInt(w.duration || 0), 0) / workouts.length) : 0;
       document.getElementById('avgDuration').textContent = avgDuration + ' min';
     }
 
-    // Update PR list
     function updatePRList() {
-      const prs = {};
+      const prMap = {};
+      
       workouts.forEach(w => {
-        if (w.exercises) {
-          w.exercises.forEach(ex => {
-            if (ex.weight) {
-              if (!prs[ex.name] || parseFloat(ex.weight) > prs[ex.name].weight) {
-                prs[ex.name] = { weight: parseFloat(ex.weight), date: w.date };
+        w.exercises.forEach(ex => {
+          if (ex.sets && Array.isArray(ex.sets)) {
+            ex.sets.forEach(set => {
+              if (set.weight) {
+                if (!prMap[ex.name] || parseInt(set.weight) > prMap[ex.name]) {
+                  prMap[ex.name] = parseInt(set.weight);
+                }
               }
-            }
-          });
-        }
+            });
+          }
+        });
       });
-      const html = Object.entries(prs).sort((a, b) => b[1].weight - a[1].weight).map(([exercise, pr]) => {
-        const date = new Date(pr.date);
-        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        return `
-          <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--card-border);">
-            <div style="font-weight: 500; color: var(--text-primary);">${exercise}</div>
-            <div style="font-size: 24px; font-weight: 600; color: var(--accent); margin: 0.5rem 0;">${pr.weight} lbs</div>
-            <div style="font-size: 13px; color: var(--text-secondary);">${dateStr}</div>
-          </div>
-        `;
-      }).join('');
-      document.getElementById('prList').innerHTML = html || '<p>Log weighted workouts to see your personal records</p>';
+      
+      const sorted = Object.entries(prMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+      
+      if (sorted.length === 0) {
+        document.getElementById('prList').innerHTML = '<div class="empty-state"><p>Log workouts to see your PRs</p></div>';
+        return;
+      }
+      
+      const html = sorted.map(([name, weight]) => `
+        <div style="padding: 0.75rem 0; border-bottom: 0.5px solid var(--card-border);">
+          <div style="font-weight: 500; color: var(--text-primary);">${name}</div>
+          <div style="font-size: 18px; font-weight: 600; color: var(--accent);">${weight} lbs</div>
+        </div>
+      `).join('');
+      
+      document.getElementById('prList').innerHTML = html;
     }
 
-    // Update history timeline
     function updateHistoryTimeline() {
-      if (workouts.length === 0) return;
+      const container = document.getElementById('historyTimeline');
+      if (!container) return;
+      
+      if (workouts.length === 0) {
+        container.innerHTML = '<div class="empty-state"><p>No workouts logged yet. Start logging workouts to see your history!</p></div>';
+        return;
+      }
+
       const html = workouts.map((w, idx) => {
         const date = new Date(w.date);
         const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -1938,7 +1676,6 @@
         const exercises = w.exercises.map(e => {
           let exerciseStr = e.name;
           if (e.sets && Array.isArray(e.sets)) {
-            // Handle individual sets (Back/Shoulders new format)
             const repsArray = e.sets.map(s => s.reps).filter(r => r);
             const weightsArray = e.sets.map(s => s.weight).filter(w => w);
             if (repsArray.length > 0 && weightsArray.length > 0) {
@@ -1947,7 +1684,6 @@
               exerciseStr += ` (${e.sets.length} sets: ${repsArray.join(',')} reps)`;
             }
           } else if (e.sets || e.reps) {
-            // Handle simple format (fallback)
             exerciseStr += ` (${e.sets}×${e.reps}${e.weight ? ' @ ' + e.weight + ' lbs' : ''})`;
           }
           return exerciseStr;
@@ -1964,10 +1700,9 @@
           </div>
         `;
       }).join('');
-      document.getElementById('historyTimeline').innerHTML = html;
+      container.innerHTML = html;
     }
 
-    // Delete workout by ID
     function deleteWorkout(workoutId) {
       if (confirm('Are you sure you want to delete this workout?')) {
         workouts = workouts.filter(w => w.id !== workoutId);
@@ -1977,13 +1712,133 @@
       }
     }
 
-    // Load Chart.js
+    function downloadWorkoutReport() {
+      if (workouts.length === 0) {
+        alert('No workouts to export yet!');
+        return;
+      }
+
+      let csv = 'Date,Workout,Exercise,Performance,Duration,Notes\n';
+      
+      workouts.forEach(w => {
+        const date = new Date(w.date);
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+        
+        w.exercises.forEach(ex => {
+          let performance = '';
+          
+          if (ex.sets && Array.isArray(ex.sets)) {
+            const repsArray = ex.sets.map(s => s.reps).filter(r => r);
+            const weightsArray = ex.sets.map(s => s.weight).filter(w => w);
+            
+            if (repsArray.length > 0 && weightsArray.length > 0) {
+              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps @ ${weightsArray[0]} lbs`;
+            } else if (repsArray.length > 0) {
+              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps`;
+            }
+          } else if (ex.sets || ex.reps || ex.weight) {
+            const parts = [];
+            if (ex.sets) parts.push(`${ex.sets}×${ex.reps}`);
+            if (ex.weight) parts.push(`${ex.weight} lbs`);
+            performance = parts.join(' @ ');
+          }
+          
+          if (performance) {
+            csv += `${dateStr},"${w.muscle}","${ex.name}","${performance}",${w.duration},"${w.notes || ''}"\n`;
+          }
+        });
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Workout_Report_${new Date().toLocaleDateString('en-US').replace(/\//g, '-')}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    }
+
+    function formatTime(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function startTimer(type) {
+      if (timerActive[type]) return;
+      
+      timerActive[type] = true;
+      document.getElementById(type + 'StartBtn').style.display = 'none';
+      document.getElementById(type + 'StopBtn').style.display = 'inline-block';
+      
+      timerIntervals[type] = setInterval(() => {
+        timerSeconds[type]++;
+        document.getElementById(type + 'Timer').textContent = formatTime(timerSeconds[type]);
+      }, 1000);
+    }
+
+    function stopTimer(type) {
+      if (!timerActive[type]) return;
+      
+      timerActive[type] = false;
+      clearInterval(timerIntervals[type]);
+      document.getElementById(type + 'StartBtn').style.display = 'inline-block';
+      document.getElementById(type + 'StopBtn').style.display = 'none';
+    }
+
+    function updateAllDashboards() {
+      updateDashboardStats();
+      updateRecentWorkout();
+      updateWeekChart();
+      updateTopMuscles();
+      updateProgressStats();
+      updatePRList();
+      updateHistoryTimeline();
+    }
+
+    function loadData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        workouts = JSON.parse(saved);
+      }
+      setDefaultDates();
+      updateAllDashboards();
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(workouts));
+      updateLastUpdated();
+    }
+
+    function updateLastUpdated() {
+      const options = { month: 'short', day: 'numeric', year: 'numeric' };
+      const today = new Date().toLocaleDateString('en-US', options);
+      document.getElementById('lastUpdated').textContent = today;
+    }
+
+    function setDefaultDates() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      
+      const datetimeString = `${year}-${month}-${day}T${hours}:${minutes}`;
+      
+      document.getElementById('backDate').value = datetimeString;
+      document.getElementById('shouldersDate').value = datetimeString;
+    }
+
     const script = document.createElement('script');
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
     script.onload = () => {
       loadData();
     };
     document.head.appendChild(script);
-  </script>
+    </script>
 </body>
 </html>
