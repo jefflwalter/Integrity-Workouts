@@ -64,6 +64,7 @@
     @media (max-width: 768px) { .set-input-group { flex-direction: column; gap: 0.25rem; } }
     .set-input { padding: 0.5rem !important; font-size: 14px !important; flex: 1; }
     @media (max-width: 768px) { .set-input { padding: 0.75rem !important; font-size: 16px !important; } }
+    .previous-data { text-align: right; font-size: 12px; color: var(--text-secondary); font-style: italic; padding: 0.5rem 0; }
     .timer-section { background: var(--card-bg); border: 0.5px solid var(--card-border); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
     @media (max-width: 768px) { .timer-section { flex-direction: column; align-items: stretch; gap: 0.75rem; } }
     .timer-display { font-size: 32px; font-weight: 600; color: var(--accent); font-family: 'Courier New', monospace; min-width: 150px; text-align: center; }
@@ -153,7 +154,7 @@
                     <!-- Ex 1: Lat Pulldown -->
                     <div class="exercise-box"><h4>Small Neutral Grip Lat Pulldown</h4><div class="exercise-label">4 sets x 6-10 reps • 140 lbs</div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex1_s1_reps" min="1" placeholder="Reps"><input type="number" class="set-input" id="back_ex1_s1_weight" step="0.5" value="140"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex1_s1_reps" min="1" placeholder="Reps"><input type="number" class="set-input" id="back_ex1_s1_weight" step="0.5" value="140"></div><div class="previous-data" id="back_ex1_s1_prev"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
                         <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex1_s2_reps" min="1" placeholder="Reps"><input type="number" class="set-input" id="back_ex1_s2_weight" step="0.5" value="140"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
@@ -170,37 +171,37 @@
                         <!-- Ex 2 -->
                         <div class="exercise-box"><h4>Single Arm High Row</h4><div class="exercise-label">4 sets x 10 reps • 70 lbs</div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex2_s1_reps" min="1"><input type="number" class="set-input" id="back_ex2_s1_weight" step="0.5" value="70"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex2_s1_reps" min="1"><input type="number" class="set-input" id="back_ex2_s1_weight" step="0.5" value="70"></div><div class="previous-data" id="back_ex2_s1_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex2_s2_reps" min="1"><input type="number" class="set-input" id="back_ex2_s2_weight" step="0.5" value="70"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex2_s2_reps" min="1"><input type="number" class="set-input" id="back_ex2_s2_weight" step="0.5" value="70"></div><div class="previous-data" id="back_ex2_s2_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex2_s3_reps" min="1"><input type="number" class="set-input" id="back_ex2_s3_weight" step="0.5" value="70"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex2_s3_reps" min="1"><input type="number" class="set-input" id="back_ex2_s3_weight" step="0.5" value="70"></div><div class="previous-data" id="back_ex2_s3_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 4 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex2_s4_reps" min="1"><input type="number" class="set-input" id="back_ex2_s4_weight" step="0.5" value="70"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex2_s4_reps" min="1"><input type="number" class="set-input" id="back_ex2_s4_weight" step="0.5" value="70"></div><div class="previous-data" id="back_ex2_s4_reps_prev_temp"></div></div>
                         </div>
 
                         <!-- Ex 3 -->
                         <div class="exercise-box"><h4>Small Seated Cable Row</h4><div class="exercise-label">4 sets x 12-15 reps • 80 lbs</div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex3_s1_reps" min="1"><input type="number" class="set-input" id="back_ex3_s1_weight" step="0.5" value="80"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex3_s1_reps" min="1"><input type="number" class="set-input" id="back_ex3_s1_weight" step="0.5" value="80"></div><div class="previous-data" id="back_ex3_s1_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex3_s2_reps" min="1"><input type="number" class="set-input" id="back_ex3_s2_weight" step="0.5" value="80"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex3_s2_reps" min="1"><input type="number" class="set-input" id="back_ex3_s2_weight" step="0.5" value="80"></div><div class="previous-data" id="back_ex3_s2_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex3_s3_reps" min="1"><input type="number" class="set-input" id="back_ex3_s3_weight" step="0.5" value="80"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex3_s3_reps" min="1"><input type="number" class="set-input" id="back_ex3_s3_weight" step="0.5" value="80"></div><div class="previous-data" id="back_ex3_s3_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 4 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex3_s4_reps" min="1"><input type="number" class="set-input" id="back_ex3_s4_weight" step="0.5" value="80"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex3_s4_reps" min="1"><input type="number" class="set-input" id="back_ex3_s4_weight" step="0.5" value="80"></div><div class="previous-data" id="back_ex3_s4_reps_prev_temp"></div></div>
                         </div>
 
                         <!-- Ex 4 -->
                         <div class="exercise-box"><h4>DB Single Arm Row</h4><div class="exercise-label">4 sets x 10 reps • 40 lbs</div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex4_s1_reps" min="1"><input type="number" class="set-input" id="back_ex4_s1_weight" step="0.5" value="40"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex4_s1_reps" min="1"><input type="number" class="set-input" id="back_ex4_s1_weight" step="0.5" value="40"></div><div class="previous-data" id="back_ex4_s1_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex4_s2_reps" min="1"><input type="number" class="set-input" id="back_ex4_s2_weight" step="0.5" value="40"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex4_s2_reps" min="1"><input type="number" class="set-input" id="back_ex4_s2_weight" step="0.5" value="40"></div><div class="previous-data" id="back_ex4_s2_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex4_s3_reps" min="1"><input type="number" class="set-input" id="back_ex4_s3_weight" step="0.5" value="40"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex4_s3_reps" min="1"><input type="number" class="set-input" id="back_ex4_s3_weight" step="0.5" value="40"></div><div class="previous-data" id="back_ex4_s3_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 4 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex4_s4_reps" min="1"><input type="number" class="set-input" id="back_ex4_s4_weight" step="0.5" value="40"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex4_s4_reps" min="1"><input type="number" class="set-input" id="back_ex4_s4_weight" step="0.5" value="40"></div><div class="previous-data" id="back_ex4_s4_reps_prev_temp"></div></div>
                         </div>
                         <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
                     </div>
@@ -208,11 +209,11 @@
                     <!-- Ex 5 -->
                     <div class="exercise-box"><h4>Cable Lat Pullover</h4><div class="exercise-label">3 sets x 10 reps • 70 lbs</div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 3</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex5_s1_reps" min="1"><input type="number" class="set-input" id="back_ex5_s1_weight" step="0.5" value="70"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex5_s1_reps" min="1"><input type="number" class="set-input" id="back_ex5_s1_weight" step="0.5" value="70"></div><div class="previous-data" id="back_ex5_s1_reps_prev_temp"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 3</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex5_s2_reps" min="1"><input type="number" class="set-input" id="back_ex5_s2_weight" step="0.5" value="70"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex5_s2_reps" min="1"><input type="number" class="set-input" id="back_ex5_s2_weight" step="0.5" value="70"></div><div class="previous-data" id="back_ex5_s2_reps_prev_temp"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 3</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex5_s3_reps" min="1"><input type="number" class="set-input" id="back_ex5_s3_weight" step="0.5" value="70"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="back_ex5_s3_reps" min="1"><input type="number" class="set-input" id="back_ex5_s3_weight" step="0.5" value="70"></div><div class="previous-data" id="back_ex5_s3_reps_prev_temp"></div></div>
                     </div>
 
                     <div class="form-group"><label>Duration (min)</label><input type="number" id="backDuration" min="1" value="60"></div>
@@ -237,23 +238,23 @@
                     <!-- Ex 1 -->
                     <div class="exercise-box"><h4>Knuckleout Shoulder Press</h4><div class="exercise-label">4 sets x 8-12 reps • 25 lbs</div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex1_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex1_s1_weight" step="0.5" value="25"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex1_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex1_s1_weight" step="0.5" value="25"></div><div class="previous-data" id="sh_ex1_s1_reps_prev_temp"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex1_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex1_s2_weight" step="0.5" value="25"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex1_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex1_s2_weight" step="0.5" value="25"></div><div class="previous-data" id="sh_ex1_s2_reps_prev_temp"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex1_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex1_s3_weight" step="0.5" value="25"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex1_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex1_s3_weight" step="0.5" value="25"></div><div class="previous-data" id="sh_ex1_s3_reps_prev_temp"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 4 of 4</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex1_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex1_s4_weight" step="0.5" value="25"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex1_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex1_s4_weight" step="0.5" value="25"></div><div class="previous-data" id="sh_ex1_s4_reps_prev_temp"></div></div>
                     </div>
 
                     <!-- Ex 2 -->
                     <div class="exercise-box"><h4>DB Side Lateral</h4><div class="exercise-label">3 sets x 12-15 reps • 12 lbs</div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 3</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex2_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex2_s1_weight" step="0.5" value="12"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex2_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex2_s1_weight" step="0.5" value="12"></div><div class="previous-data" id="sh_ex2_s1_reps_prev_temp"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 3</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex2_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex2_s2_weight" step="0.5" value="12"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex2_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex2_s2_weight" step="0.5" value="12"></div><div class="previous-data" id="sh_ex2_s2_reps_prev_temp"></div></div>
                         <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 3</span><span class="set-header-toggle">▶</span></div>
-                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex2_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex2_s3_weight" step="0.5" value="12"></div></div>
+                        <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex2_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex2_s3_weight" step="0.5" value="12"></div><div class="previous-data" id="sh_ex2_s3_reps_prev_temp"></div></div>
                     </div>
 
                     <!-- SUPERSET 1 -->
@@ -263,13 +264,13 @@
 
                         <div class="exercise-box"><h4>Arnold Twist Press</h4><div class="exercise-label">4 sets x 10 reps • 15 lbs</div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex3_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex3_s1_weight" step="0.5" value="15"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex3_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex3_s1_weight" step="0.5" value="15"></div><div class="previous-data" id="sh_ex3_s1_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex3_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex3_s2_weight" step="0.5" value="15"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex3_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex3_s2_weight" step="0.5" value="15"></div><div class="previous-data" id="sh_ex3_s2_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex3_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex3_s3_weight" step="0.5" value="15"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex3_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex3_s3_weight" step="0.5" value="15"></div><div class="previous-data" id="sh_ex3_s3_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 4 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex3_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex3_s4_weight" step="0.5" value="15"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex3_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex3_s4_weight" step="0.5" value="15"></div><div class="previous-data" id="sh_ex3_s4_reps_prev_temp"></div></div>
                         </div>
 
                         <div class="exercise-box"><h4>RB Side Lateral</h4><div class="exercise-label">4 sets x 10 reps • Green band</div>
@@ -303,35 +304,35 @@
 
                         <div class="exercise-box"><h4>V-Bar Cable Front Raise</h4><div class="exercise-label">4 sets x 8 reps • 20 lbs</div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex6_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex6_s1_weight" step="0.5" value="20"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex6_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex6_s1_weight" step="0.5" value="20"></div><div class="previous-data" id="sh_ex6_s1_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex6_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex6_s2_weight" step="0.5" value="20"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex6_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex6_s2_weight" step="0.5" value="20"></div><div class="previous-data" id="sh_ex6_s2_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex6_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex6_s3_weight" step="0.5" value="20"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex6_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex6_s3_weight" step="0.5" value="20"></div><div class="previous-data" id="sh_ex6_s3_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 4 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex6_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex6_s4_weight" step="0.5" value="20"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex6_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex6_s4_weight" step="0.5" value="20"></div><div class="previous-data" id="sh_ex6_s4_reps_prev_temp"></div></div>
                         </div>
 
                         <div class="exercise-box"><h4>Cybex Shoulder Press</h4><div class="exercise-label">4 sets x 8 reps • 55 lbs</div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex7_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex7_s1_weight" step="0.5" value="55"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex7_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex7_s1_weight" step="0.5" value="55"></div><div class="previous-data" id="sh_ex7_s1_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex7_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex7_s2_weight" step="0.5" value="55"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex7_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex7_s2_weight" step="0.5" value="55"></div><div class="previous-data" id="sh_ex7_s2_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex7_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex7_s3_weight" step="0.5" value="55"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex7_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex7_s3_weight" step="0.5" value="55"></div><div class="previous-data" id="sh_ex7_s3_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 4 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex7_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex7_s4_weight" step="0.5" value="55"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex7_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex7_s4_weight" step="0.5" value="55"></div><div class="previous-data" id="sh_ex7_s4_reps_prev_temp"></div></div>
                         </div>
 
                         <div class="exercise-box"><h4>Cable Side Lateral</h4><div class="exercise-label">4 sets x 10 reps • 10 lbs</div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 1 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex8_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex8_s1_weight" step="0.5" value="10"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex8_s1_reps" min="1"><input type="number" class="set-input" id="sh_ex8_s1_weight" step="0.5" value="10"></div><div class="previous-data" id="sh_ex8_s1_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 2 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex8_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex8_s2_weight" step="0.5" value="10"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex8_s2_reps" min="1"><input type="number" class="set-input" id="sh_ex8_s2_weight" step="0.5" value="10"></div><div class="previous-data" id="sh_ex8_s2_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 3 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex8_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex8_s3_weight" step="0.5" value="10"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex8_s3_reps" min="1"><input type="number" class="set-input" id="sh_ex8_s3_weight" step="0.5" value="10"></div><div class="previous-data" id="sh_ex8_s3_reps_prev_temp"></div></div>
                             <div class="set-header" onclick="toggleSet(this)"><span>Set 4 of 4</span><span class="set-header-toggle">▶</span></div>
-                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex8_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex8_s4_weight" step="0.5" value="10"></div></div>
+                            <div class="set-row"><div><div class="set-label">Reps</div></div><div class="set-input-group"><input type="number" class="set-input" id="sh_ex8_s4_reps" min="1"><input type="number" class="set-input" id="sh_ex8_s4_weight" step="0.5" value="10"></div><div class="previous-data" id="sh_ex8_s4_reps_prev_temp"></div></div>
                         </div>
                         <div class="superset-rest-end">⏱️ 90 sec rest after superset</div>
                     </div>
@@ -402,6 +403,7 @@
       });
       workouts.unshift({ id: Date.now(), date, type: 'back', exercises, duration: document.getElementById('backDuration').value, notes: document.getElementById('backNotes').value, muscle: 'Back' });
       saveData();
+      updateHistoryDisplay();
       updateAllDashboards();
       document.querySelector('#backForm form').reset();
       setDefaultDates();
@@ -433,6 +435,7 @@
       });
       workouts.unshift({ id: Date.now(), date, type: 'shoulders', exercises, duration: document.getElementById('shouldersDuration').value, notes: document.getElementById('shouldersNotes').value, muscle: 'Shoulders' });
       saveData();
+      updateHistoryDisplay();
       updateAllDashboards();
       document.querySelector('#shouldersForm form').reset();
       setDefaultDates();
@@ -521,6 +524,32 @@
       container.innerHTML = workouts.map(w => `<div style="padding: 1rem; border-bottom: 1px solid var(--card-border);"><strong>${w.muscle}</strong> - ${new Date(w.date).toLocaleDateString()} | ${w.duration} min <button onclick="deleteWorkout(${w.id})" style="float: right; padding: 0.25rem 0.75rem; background: #d32f2f; color: white; border: none; border-radius: 4px; font-size: 12px; cursor: pointer;">Delete</button></div>`).join('');
     }
 
+    function updateHistoryDisplay() {
+      if (workouts.length < 2) return;
+      
+      const lastWorkout = workouts[0];
+      const prevWorkout = workouts.find(w => w.type === lastWorkout.type && w.id !== lastWorkout.id);
+      
+      if (!prevWorkout) return;
+      
+      prevWorkout.exercises.forEach(ex => {
+        const exIndex = lastWorkout.exercises.findIndex(e => e.name === ex.name);
+        if (exIndex === -1) return;
+        
+        ex.sets.forEach((set, setIndex) => {
+          const workoutType = lastWorkout.type.substring(0, 2);
+          const exNum = exIndex + 1;
+          const setNum = setIndex + 1;
+          const prevDataId = `${workoutType}_ex${exNum}_s${setNum}_prev`;
+          const prevElement = document.getElementById(prevDataId);
+          
+          if (prevElement) {
+            prevElement.textContent = `← ${set.reps} reps @ ${set.weight || 'band'} lbs`;
+          }
+        });
+      });
+    }
+
     function deleteWorkout(id) {
       if (confirm('Delete this workout?')) {
         workouts = workouts.filter(w => w.id !== id);
@@ -598,6 +627,7 @@
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) workouts = JSON.parse(saved);
       setDefaultDates();
+      updateHistoryDisplay();
       updateAllDashboards();
     }
 
