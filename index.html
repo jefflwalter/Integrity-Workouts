@@ -939,41 +939,71 @@
             <div class="exercise-box">
               <h4>Knuckleout Shoulder Press</h4>
               <div class="exercise-label">Program: 4 sets x 8-12 reps • 90 sec rest • 25 lbs</div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Sets</label>
-                  <input type="number" id="sh_ex1_sets" min="1" value="4">
+              
+              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+              <div class="set-row">
+                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                <div class="set-input-group">
+                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s1_reps" min="1" placeholder="8-12"></div>
+                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s1_weight" step="0.5" value="25"></div>
                 </div>
-                <div class="form-group">
-                  <label>Reps</label>
-                  <input type="number" id="sh_ex1_reps" min="1" placeholder="8-12">
-                </div>
-                <div class="form-group">
-                  <label>Weight</label>
-                  <input type="number" id="sh_ex1_weight" step="0.5" value="25">
-                </div>
+                <div class="previous-data" id="sh_ex1_s1_prev"></div>
               </div>
-              <div id="sh_ex1_history" class="history-text"></div>
+              <div class="set-row">
+                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                <div class="set-input-group">
+                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s2_reps" min="1" placeholder="8-12"></div>
+                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s2_weight" step="0.5" value="25"></div>
+                </div>
+                <div class="previous-data" id="sh_ex1_s2_prev"></div>
+              </div>
+              <div class="set-row">
+                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                <div class="set-input-group">
+                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s3_reps" min="1" placeholder="8-12"></div>
+                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s3_weight" step="0.5" value="25"></div>
+                </div>
+                <div class="previous-data" id="sh_ex1_s3_prev"></div>
+              </div>
+              <div class="set-row">
+                <div style="min-width: 70px;"><div class="set-label">Set 4</div></div>
+                <div class="set-input-group">
+                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex1_s4_reps" min="1" placeholder="8-12"></div>
+                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex1_s4_weight" step="0.5" value="25"></div>
+                </div>
+                <div class="previous-data" id="sh_ex1_s4_prev"></div>
+              </div>
             </div>
 
             <div class="exercise-box">
               <h4>DB Side Lateral</h4>
               <div class="exercise-label">Program: 3 sets x 12-15 reps • 60 sec rest • 12 lbs</div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Sets</label>
-                  <input type="number" id="sh_ex2_sets" min="1" value="3">
+              
+              <div style="margin-bottom: 0.5rem; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-transform: uppercase;">Today's Sets</div>
+              <div class="set-row">
+                <div style="min-width: 70px;"><div class="set-label">Set 1</div></div>
+                <div class="set-input-group">
+                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s1_reps" min="1" placeholder="12-15"></div>
+                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s1_weight" step="0.5" value="12"></div>
                 </div>
-                <div class="form-group">
-                  <label>Reps</label>
-                  <input type="number" id="sh_ex2_reps" min="1" placeholder="12-15">
-                </div>
-                <div class="form-group">
-                  <label>Weight</label>
-                  <input type="number" id="sh_ex2_weight" step="0.5" value="12">
-                </div>
+                <div class="previous-data" id="sh_ex2_s1_prev"></div>
               </div>
-              <div id="sh_ex2_history" class="history-text"></div>
+              <div class="set-row">
+                <div style="min-width: 70px;"><div class="set-label">Set 2</div></div>
+                <div class="set-input-group">
+                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s2_reps" min="1" placeholder="12-15"></div>
+                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s2_weight" step="0.5" value="12"></div>
+                </div>
+                <div class="previous-data" id="sh_ex2_s2_prev"></div>
+              </div>
+              <div class="set-row">
+                <div style="min-width: 70px;"><div class="set-label">Set 3</div></div>
+                <div class="set-input-group">
+                  <div style="flex: 1;"><div class="set-label">Reps</div><input type="number" class="set-input" id="sh_ex2_s3_reps" min="1" placeholder="12-15"></div>
+                  <div style="flex: 1;"><div class="set-label">Weight</div><input type="number" class="set-input" id="sh_ex2_s3_weight" step="0.5" value="12"></div>
+                </div>
+                <div class="previous-data" id="sh_ex2_s3_prev"></div>
+              </div>
             </div>
 
             <div class="superset-group">
@@ -1257,18 +1287,35 @@
         return;
       }
 
-      let csv = 'Date,Time,Workout Type,Exercise,Set,Reps,Weight (lbs),Duration (min),Notes\n';
+      let csv = 'Date,Workout,Exercise,Performance,Duration,Notes\n';
       
       workouts.forEach(w => {
         const date = new Date(w.date);
-        const dateStr = date.toLocaleDateString('en-US');
-        const timeStr = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
         
         w.exercises.forEach(ex => {
+          let performance = '';
+          
           if (ex.sets && Array.isArray(ex.sets)) {
-            ex.sets.forEach((set, setIdx) => {
-              csv += `${dateStr},${timeStr},${w.muscle},"${ex.name}",${setIdx + 1},${set.reps || ''},${set.weight || ''},${w.duration},"${w.notes || ''}"\n`;
-            });
+            // For Back (set-by-set format)
+            const repsArray = ex.sets.map(s => s.reps).filter(r => r);
+            const weightsArray = ex.sets.map(s => s.weight).filter(w => w);
+            
+            if (repsArray.length > 0 && weightsArray.length > 0) {
+              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps @ ${weightsArray[0]} lbs`;
+            } else if (repsArray.length > 0) {
+              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps`;
+            }
+          } else if (ex.sets || ex.reps || ex.weight) {
+            // For Shoulders (simple format)
+            const parts = [];
+            if (ex.sets) parts.push(`${ex.sets}×${ex.reps}`);
+            if (ex.weight) parts.push(`${ex.weight} lbs`);
+            performance = parts.join(' @ ');
+          }
+          
+          if (performance) {
+            csv += `${dateStr},"${w.muscle}","${ex.name}","${performance}",${w.duration},"${w.notes || ''}"\n`;
           }
         });
       });
@@ -1395,8 +1442,23 @@
       
       const date = document.getElementById('shouldersDate').value;
       const exercises = [
-        { name: 'Knuckleout Shoulder Press', sets: document.getElementById('sh_ex1_sets').value, reps: document.getElementById('sh_ex1_reps').value, weight: document.getElementById('sh_ex1_weight').value },
-        { name: 'DB Side Lateral', sets: document.getElementById('sh_ex2_sets').value, reps: document.getElementById('sh_ex2_reps').value, weight: document.getElementById('sh_ex2_weight').value },
+        { 
+          name: 'Knuckleout Shoulder Press', 
+          sets: [
+            { reps: document.getElementById('sh_ex1_s1_reps').value, weight: document.getElementById('sh_ex1_s1_weight').value },
+            { reps: document.getElementById('sh_ex1_s2_reps').value, weight: document.getElementById('sh_ex1_s2_weight').value },
+            { reps: document.getElementById('sh_ex1_s3_reps').value, weight: document.getElementById('sh_ex1_s3_weight').value },
+            { reps: document.getElementById('sh_ex1_s4_reps').value, weight: document.getElementById('sh_ex1_s4_weight').value }
+          ]
+        },
+        { 
+          name: 'DB Side Lateral', 
+          sets: [
+            { reps: document.getElementById('sh_ex2_s1_reps').value, weight: document.getElementById('sh_ex2_s1_weight').value },
+            { reps: document.getElementById('sh_ex2_s2_reps').value, weight: document.getElementById('sh_ex2_s2_weight').value },
+            { reps: document.getElementById('sh_ex2_s3_reps').value, weight: document.getElementById('sh_ex2_s3_weight').value }
+          ]
+        },
         { name: 'Arnold Twist Press', sets: document.getElementById('sh_ex3_sets').value, reps: document.getElementById('sh_ex3_reps').value, weight: document.getElementById('sh_ex3_weight').value },
         { name: 'RB Side Lateral', sets: document.getElementById('sh_ex4_sets').value, reps: document.getElementById('sh_ex4_reps').value, weight: null },
         { name: 'RB Front Raise', sets: document.getElementById('sh_ex5_sets').value, reps: document.getElementById('sh_ex5_reps').value, weight: null },
