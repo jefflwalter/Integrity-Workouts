@@ -113,12 +113,20 @@
                 <h2 style="margin: 0;">Dashboard</h2>
                 <button onclick="location.reload()" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500;">🔄 Refresh</button>
             </div>
+            <div class="card">
+                <h3>Top muscle groups this week</h3>
+                <div id="topMuscles" class="empty-state">
+                    <p>Log workouts to see your top muscle groups</p>
+                </div>
+            </div>
+
             <div class="card-grid">
                 <div class="card"><h3>This week</h3><p>Total workouts</p><div class="stat-value" id="weekWorkouts">0</div></div>
                 <div class="card"><h3>Current streak</h3><p>Consecutive days</p><div class="stat-value" id="streak">0</div></div>
                 <div class="card"><h3>Time spent</h3><p>Total minutes</p><div class="stat-value" id="totalTime">0</div></div>
                 <div class="card"><h3>Personal record</h3><p>Heaviest lift</p><div class="stat-value" id="pr">—</div></div>
             </div>
+
             <div class="card"><h3>Most recent workout</h3><div id="recentWorkout" class="empty-state"><p>No workouts yet!</p></div></div>
         </div>
 
@@ -430,7 +438,8 @@
     }
 
     function updateAllDashboards() {
-      document.getElementById('weekWorkouts').textContent = workouts.length;
+      const weekWorkouts = getWeekWorkouts();
+      document.getElementById('weekWorkouts').textContent = weekWorkouts.length;
       document.getElementById('streak').textContent = 0;
       document.getElementById('totalTime').textContent = workouts.reduce((s, w) => s + parseInt(w.duration || 0), 0);
       let maxW = 0;
@@ -438,7 +447,67 @@
       document.getElementById('pr').textContent = maxW > 0 ? maxW + ' lbs' : '—';
       document.getElementById('totalVolume').textContent = workouts.reduce((s, w) => s + w.exercises.reduce((es, ex) => es + ex.sets.reduce((ss, s) => ss + (parseInt(s.weight) || 0) * (parseInt(s.reps) || 0), 0), 0), 0) + ' lbs';
       document.getElementById('recentWorkout').innerHTML = workouts.length > 0 ? `<p>${workouts[0].muscle} - ${new Date(workouts[0].date).toLocaleDateString()}</p>` : '<p>No workouts yet</p>';
+      updateTopMuscles();
       updateHistoryTimeline();
+    }
+
+    function getWeekWorkouts() {
+      const now = new Date();
+      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      return workouts.filter(w => new Date(w.date) >= weekAgo);
+    }
+
+    function updateTopMuscles() {
+      const weekWorkouts = getWeekWorkouts();
+      const targetMuscles = ['Back', 'Shoulders', 'Chest', 'Hamstrings', 'Quads', 'Arms'];
+      const hitMuscles = new Set();
+      
+      weekWorkouts.forEach(w => {
+        if (targetMuscles.includes(w.muscle)) {
+          hitMuscles.add(w.muscle);
+        }
+      });
+      
+      const completionPercentage = Math.round((hitMuscles.size / targetMuscles.length) * 100);
+      const allComplete = hitMuscles.size === targetMuscles.length;
+      
+      let html = `
+        <div style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div style="font-size: 14px; font-weight: 500; color: var(--text-primary);">Weekly Coverage</div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--accent);">${completionPercentage}%</div>
+          </div>
+          <div style="background: rgba(0,0,0,0.1); border-radius: 8px; height: 8px; overflow: hidden;">
+            <div style="background: ${allComplete ? '#4CAF50' : 'var(--accent)'}; height: 100%; width: ${completionPercentage}%; transition: width 0.3s ease;"></div>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+      `;
+      
+      targetMuscles.forEach(muscle => {
+        const hit = hitMuscles.has(muscle);
+        const count = weekWorkouts.filter(w => w.muscle === muscle).length;
+        html += `
+          <div style="padding: 0.75rem; border-radius: 8px; background: ${hit ? 'rgba(76, 175, 80, 0.15)' : 'rgba(0,0,0,0.05)'}; border: 1px solid ${hit ? '#4CAF50' : 'rgba(0,0,0,0.1)'}; text-align: center;">
+            <div style="font-weight: 500; color: ${hit ? '#2E7D32' : 'var(--text-secondary)'}; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+              ${hit ? '✓' : '○'} ${muscle}
+            </div>
+            <div style="font-size: 13px; color: var(--text-secondary); margin-top: 0.25rem;">${count} ${count === 1 ? 'session' : 'sessions'}</div>
+          </div>
+        `;
+      });
+      
+      html += `</div>`;
+      
+      if (allComplete) {
+        html += `<div style="padding: 0.75rem; background: rgba(76, 175, 80, 0.15); border-radius: 8px; text-align: center; color: #2E7D32; font-weight: 500; font-size: 13px; border: 1px solid #4CAF50;">✓ Full body coverage this week!</div>`;
+      } else {
+        const missing = targetMuscles.filter(m => !hitMuscles.has(m));
+        html += `<div style="padding: 0.75rem; background: rgba(255, 193, 7, 0.15); border-radius: 8px; text-align: center; color: #FFC107; font-weight: 500; font-size: 13px; border: 1px solid #FFC107;">Missing this week: ${missing.join(', ')}</div>`;
+      }
+      
+      document.getElementById('topMuscles').innerHTML = html;
     }
 
     function updateHistoryTimeline() {
