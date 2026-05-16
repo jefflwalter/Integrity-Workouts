@@ -1935,7 +1935,23 @@
         const date = new Date(w.date);
         const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-        const exercises = w.exercises.map(e => `${e.name} (${e.sets}×${e.reps}${e.weight ? ' @ ' + e.weight + ' lbs' : ''})`).join(' • ');
+        const exercises = w.exercises.map(e => {
+          let exerciseStr = e.name;
+          if (e.sets && Array.isArray(e.sets)) {
+            // Handle individual sets (Back/Shoulders new format)
+            const repsArray = e.sets.map(s => s.reps).filter(r => r);
+            const weightsArray = e.sets.map(s => s.weight).filter(w => w);
+            if (repsArray.length > 0 && weightsArray.length > 0) {
+              exerciseStr += ` (${e.sets.length} sets: ${repsArray.join(',')} reps @ ${weightsArray[0]} lbs)`;
+            } else if (repsArray.length > 0) {
+              exerciseStr += ` (${e.sets.length} sets: ${repsArray.join(',')} reps)`;
+            }
+          } else if (e.sets || e.reps) {
+            // Handle simple format (fallback)
+            exerciseStr += ` (${e.sets}×${e.reps}${e.weight ? ' @ ' + e.weight + ' lbs' : ''})`;
+          }
+          return exerciseStr;
+        }).join(' • ');
         return `
           <div class="timeline-item" style="display: flex; justify-content: space-between; align-items: flex-start;">
             <div style="flex: 1;">
