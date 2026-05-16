@@ -218,6 +218,7 @@
                     <div class="form-group"><label>Duration (min)</label><input type="number" id="backDuration" min="1" value="60"></div>
                     <div class="form-group"><label>Notes</label><textarea id="backNotes" style="height: 80px;"></textarea></div>
                     <button type="submit">✓ Complete Back Workout</button>
+                    <button type="button" onclick="downloadWorkoutReport()" style="width: 100%; padding: 1rem; font-size: 16px; font-weight: 600; background: var(--card-bg); color: var(--text-primary); border: 0.5px solid var(--card-border); border-radius: 8px; cursor: pointer; margin-top: 0.5rem;">📊 Download Workout Report</button>
                 </form>
             </div>
 
@@ -338,6 +339,7 @@
                     <div class="form-group"><label>Duration (min)</label><input type="number" id="shouldersDuration" min="1" value="60"></div>
                     <div class="form-group"><label>Notes</label><textarea id="shouldersNotes" style="height: 80px;"></textarea></div>
                     <button type="submit">✓ Complete Shoulders Workout</button>
+                    <button type="button" onclick="downloadWorkoutReport()" style="width: 100%; padding: 1rem; font-size: 16px; font-weight: 600; background: var(--card-bg); color: var(--text-primary); border: 0.5px solid var(--card-border); border-radius: 8px; cursor: pointer; margin-top: 0.5rem;">📊 Download Workout Report</button>
                 </form>
             </div>
         </div>
@@ -525,6 +527,49 @@
         saveData();
         updateAllDashboards();
       }
+    }
+
+    function downloadWorkoutReport() {
+      if (workouts.length === 0) {
+        alert('No workouts to export yet!');
+        return;
+      }
+
+      let csv = 'Date,Workout,Exercise,Performance,Duration,Notes\n';
+      
+      workouts.forEach(w => {
+        const date = new Date(w.date);
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+        
+        w.exercises.forEach(ex => {
+          let performance = '';
+          
+          if (ex.sets && Array.isArray(ex.sets)) {
+            const repsArray = ex.sets.map(s => s.reps).filter(r => r);
+            const weightsArray = ex.sets.map(s => s.weight).filter(w => w);
+            
+            if (repsArray.length > 0 && weightsArray.length > 0) {
+              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps @ ${weightsArray[0]} lbs`;
+            } else if (repsArray.length > 0) {
+              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps`;
+            }
+          }
+          
+          if (performance) {
+            csv += `${dateStr},"${w.muscle}","${ex.name}","${performance}",${w.duration},"${w.notes || ''}"\n`;
+          }
+        });
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Workout_Report_${new Date().toLocaleDateString('en-US').replace(/\//g, '-')}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
     }
 
     function startTimer(type) {
