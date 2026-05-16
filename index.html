@@ -415,19 +415,25 @@
             <label for="exercise">Exercise name</label>
             <select id="exercise" required onchange="updateMuscleGroup()">
               <option value="">Select an exercise...</option>
-              <option value="Bench Press">Bench Press</option>
-              <option value="Squats">Squats</option>
-              <option value="Deadlifts">Deadlifts</option>
-              <option value="Pull-ups">Pull-ups</option>
-              <option value="Barbell Rows">Barbell Rows</option>
-              <option value="Overhead Press">Overhead Press</option>
-              <option value="Dumbbell Curls">Dumbbell Curls</option>
-              <option value="Tricep Dips">Tricep Dips</option>
-              <option value="Leg Press">Leg Press</option>
-              <option value="Running">Running</option>
-              <option value="Cycling">Cycling</option>
-              <option value="Swimming">Swimming</option>
-              <option value="Other">Other</option>
+              
+              <optgroup label="BACK WORKOUT">
+                <option value="Small Neutral Grip Lat Pulldown">Small Neutral Grip Lat Pulldown (140 lbs)</option>
+                <option value="Single Arm High Row">Single Arm High Row (70 lbs)</option>
+                <option value="Small Seated Cable Row">Small Seated Cable Row (80 lbs)</option>
+                <option value="DB Single Arm Row">DB Single Arm Row (40 lbs)</option>
+                <option value="Cable Lat Pullover">Cable Lat Pullover (70 lbs)</option>
+              </optgroup>
+              
+              <optgroup label="SHOULDERS WORKOUT">
+                <option value="Knuckleout Shoulder Press">Knuckleout Shoulder Press (25 lbs)</option>
+                <option value="DB Side Lateral">DB Side Lateral (12 lbs)</option>
+                <option value="Arnold Twist Press">Arnold Twist Press (15 lbs)</option>
+                <option value="RB Side Lateral">RB Side Lateral (green band)</option>
+                <option value="RB Front Raise">RB Front Raise (green band)</option>
+                <option value="V-Bar Cable Front Raise">V-Bar Cable Front Raise (20 lbs)</option>
+                <option value="Cybex Shoulder Press">Cybex Shoulder Press (55 lbs)</option>
+                <option value="Cable Side Lateral">Cable Side Lateral (10 lbs)</option>
+              </optgroup>
             </select>
           </div>
 
@@ -449,20 +455,15 @@
 
           <div class="form-group">
             <label for="duration">Duration (minutes)</label>
-            <input type="number" id="duration" min="1" required placeholder="e.g., 45">
+            <input type="number" id="duration" min="1" required placeholder="e.g., 45-60 min for a full workout">
           </div>
 
           <div class="form-group">
             <label for="muscle">Muscle group targeted</label>
             <select id="muscle" required>
               <option value="">Select muscle group...</option>
-              <option value="Chest">Chest</option>
               <option value="Back">Back</option>
-              <option value="Legs">Legs</option>
               <option value="Shoulders">Shoulders</option>
-              <option value="Arms">Arms</option>
-              <option value="Core">Core</option>
-              <option value="Cardio">Cardio</option>
             </select>
           </div>
 
@@ -608,22 +609,46 @@
     function updateMuscleGroup() {
       const exercise = document.getElementById('exercise').value;
       const muscleMap = {
-        'Bench Press': 'Chest',
-        'Squats': 'Legs',
-        'Deadlifts': 'Legs',
-        'Pull-ups': 'Back',
-        'Barbell Rows': 'Back',
-        'Overhead Press': 'Shoulders',
-        'Dumbbell Curls': 'Arms',
-        'Tricep Dips': 'Arms',
-        'Leg Press': 'Legs',
-        'Running': 'Cardio',
-        'Cycling': 'Cardio',
-        'Swimming': 'Cardio'
+        'Small Neutral Grip Lat Pulldown': 'Back',
+        'Single Arm High Row': 'Back',
+        'Small Seated Cable Row': 'Back',
+        'DB Single Arm Row': 'Back',
+        'Cable Lat Pullover': 'Back',
+        'Knuckleout Shoulder Press': 'Shoulders',
+        'DB Side Lateral': 'Shoulders',
+        'Arnold Twist Press': 'Shoulders',
+        'RB Side Lateral': 'Shoulders',
+        'RB Front Raise': 'Shoulders',
+        'V-Bar Cable Front Raise': 'Shoulders',
+        'Cybex Shoulder Press': 'Shoulders',
+        'Cable Side Lateral': 'Shoulders'
+      };
+      
+      const exerciseDefaults = {
+        'Small Neutral Grip Lat Pulldown': { sets: 4, reps: 8, weight: 140 },
+        'Single Arm High Row': { sets: 4, reps: 10, weight: 70 },
+        'Small Seated Cable Row': { sets: 4, reps: 13, weight: 80 },
+        'DB Single Arm Row': { sets: 4, reps: 10, weight: 40 },
+        'Cable Lat Pullover': { sets: 3, reps: 10, weight: 70 },
+        'Knuckleout Shoulder Press': { sets: 4, reps: 10, weight: 25 },
+        'DB Side Lateral': { sets: 3, reps: 13, weight: 12 },
+        'Arnold Twist Press': { sets: 4, reps: 10, weight: 15 },
+        'RB Side Lateral': { sets: 4, reps: 10, weight: null },
+        'RB Front Raise': { sets: 4, reps: 10, weight: null },
+        'V-Bar Cable Front Raise': { sets: 4, reps: 8, weight: 20 },
+        'Cybex Shoulder Press': { sets: 4, reps: 8, weight: 55 },
+        'Cable Side Lateral': { sets: 4, reps: 10, weight: 10 }
       };
       
       if (muscleMap[exercise]) {
         document.getElementById('muscle').value = muscleMap[exercise];
+      }
+      
+      if (exerciseDefaults[exercise]) {
+        const defaults = exerciseDefaults[exercise];
+        document.getElementById('sets').value = defaults.sets || '';
+        document.getElementById('reps').value = defaults.reps || '';
+        document.getElementById('weight').value = defaults.weight || '';
       }
     }
 
