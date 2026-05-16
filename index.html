@@ -1784,6 +1784,7 @@
       if (confirm('Are you sure you want to delete this workout?')) {
         workouts = workouts.filter(w => w.id !== workoutId);
         saveData();
+        updateHistoryTimeline();
         updateAllDashboards();
       }
     }
