@@ -1658,21 +1658,33 @@
     // Update history timeline
     function updateHistoryTimeline() {
       if (workouts.length === 0) return;
-      const html = workouts.map(w => {
+      const html = workouts.map((w, idx) => {
         const date = new Date(w.date);
         const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
         const exercises = w.exercises.map(e => `${e.name} (${e.sets}×${e.reps}${e.weight ? ' @ ' + e.weight + ' lbs' : ''})`).join(' • ');
         return `
-          <div class="timeline-item">
-            <div class="timeline-date">${dateStr} at ${timeStr}</div>
-            <div class="timeline-label">${w.muscle} Workout</div>
-            <div class="timeline-desc">${w.duration} min • ${exercises}</div>
-            ${w.notes ? `<div class="timeline-desc" style="font-style: italic; margin-top: 0.5rem;">${w.notes}</div>` : ''}
+          <div class="timeline-item" style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="flex: 1;">
+              <div class="timeline-date">${dateStr} at ${timeStr}</div>
+              <div class="timeline-label">${w.muscle} Workout</div>
+              <div class="timeline-desc">${w.duration} min • ${exercises}</div>
+              ${w.notes ? `<div class="timeline-desc" style="font-style: italic; margin-top: 0.5rem;">${w.notes}</div>` : ''}
+            </div>
+            <button onclick="deleteWorkout(${w.id})" style="padding: 0.5rem 1rem; background: #d32f2f; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; margin-left: 1rem; white-space: nowrap;">🗑️ Delete</button>
           </div>
         `;
       }).join('');
       document.getElementById('historyTimeline').innerHTML = html;
+    }
+
+    // Delete workout by ID
+    function deleteWorkout(workoutId) {
+      if (confirm('Are you sure you want to delete this workout?')) {
+        workouts = workouts.filter(w => w.id !== workoutId);
+        saveData();
+        updateAllDashboards();
+      }
     }
 
     // Load Chart.js
