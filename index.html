@@ -435,7 +435,7 @@
         <!-- PROGRESS -->
         <div id="progress" class="section">
             <h2>Progress</h2>
-            <div class="card"><h3>All-time volume</h3><p>Total weight lifted</p><div class="stat-value" id="totalVolume">0</div></div>
+            <div id="weeklyProgress"></div>
         </div>
 
         <!-- HISTORY -->
@@ -564,6 +564,71 @@
       alert('Workout logged! 💪');
     }
 
+    function updateWeeklyProgress() {
+      if (workouts.length === 0) {
+        document.getElementById('weeklyProgress').innerHTML = '<div class="card"><p style="text-align: center; color: var(--text-secondary);">Log workouts to see weekly volume breakdown</p></div>';
+        return;
+      }
+
+      const weeks = {};
+      const today = new Date();
+      
+      workouts.forEach(w => {
+        const workoutDate = new Date(w.date);
+        const dayOfWeek = workoutDate.getDay();
+        const diff = workoutDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+        const weekStart = new Date(workoutDate.setDate(diff));
+        const weekKey = weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        
+        if (!weeks[weekKey]) {
+          weeks[weekKey] = { total: 0, bodyParts: {} };
+        }
+        
+        w.exercises.forEach(ex => {
+          let volume = 0;
+          if (ex.sets && Array.isArray(ex.sets)) {
+            ex.sets.forEach(set => {
+              volume += (parseInt(set.weight) || 0) * (parseInt(set.reps) || 0);
+            });
+          }
+          weeks[weekKey].total += volume;
+          
+          if (!weeks[weekKey].bodyParts[w.muscle]) {
+            weeks[weekKey].bodyParts[w.muscle] = 0;
+          }
+          weeks[weekKey].bodyParts[w.muscle] += volume;
+        });
+      });
+
+      const sortedWeeks = Object.entries(weeks).reverse();
+      
+      let html = '';
+      sortedWeeks.forEach(([weekLabel, data], index) => {
+        html += `
+          <div class="card">
+            <h3>Week ${index + 1} (${weekLabel})</h3>
+            <div style="margin-bottom: 1rem;">
+              <div style="font-size: 18px; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">Total Volume: ${data.total.toLocaleString()} lbs</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+        `;
+        
+        Object.entries(data.bodyParts).forEach(([muscle, volume]) => {
+          html += `
+            <div style="padding: 1rem; background: rgba(0,0,0,0.05); border-radius: 8px; border-left: 4px solid var(--accent);">
+              <div style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">${muscle}</div>
+              <div style="font-size: 20px; font-weight: 600; color: var(--accent);">${volume.toLocaleString()}</div>
+              <div style="font-size: 11px; color: var(--text-secondary); margin-top: 0.25rem;">lbs</div>
+            </div>
+          `;
+        });
+        
+        html += `</div></div>`;
+      });
+      
+      document.getElementById('weeklyProgress').innerHTML = html;
+    }
+
     function updateAllDashboards() {
       const weekWorkouts = getWeekWorkouts();
       document.getElementById('weekWorkouts').textContent = weekWorkouts.length;
@@ -572,9 +637,9 @@
       let maxW = 0;
       workouts.forEach(w => w.exercises.forEach(ex => ex.sets?.forEach(s => { if (s.weight && parseInt(s.weight) > maxW) maxW = parseInt(s.weight); })));
       document.getElementById('pr').textContent = maxW > 0 ? maxW + ' lbs' : '—';
-      document.getElementById('totalVolume').textContent = workouts.reduce((s, w) => s + w.exercises.reduce((es, ex) => es + ex.sets.reduce((ss, s) => ss + (parseInt(s.weight) || 0) * (parseInt(s.reps) || 0), 0), 0), 0) + ' lbs';
       document.getElementById('recentWorkout').innerHTML = workouts.length > 0 ? `<p>${workouts[0].muscle} - ${new Date(workouts[0].date).toLocaleDateString()}</p>` : '<p>No workouts yet</p>';
       updateTopMuscles();
+      updateWeeklyProgress();
       updateHistoryTimeline();
     }
 
@@ -654,10 +719,7 @@
       
       if (!prevWorkout) return;
       
-      prevWorkout.exercises.forEach(ex => {
-        const exIndex = lastWorkout.exercises.findIndex(e => e.name === ex.name);
-        if (exIndex === -1) return;
-        
+      prevWorkout.exercises.forEach((ex, exIndex) => {
         ex.sets.forEach((set, setIndex) => {
           const workoutType = lastWorkout.type.substring(0, 2);
           const exNum = exIndex + 1;
