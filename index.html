@@ -112,7 +112,12 @@
         <div id="dashboard" class="section active">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <h2 style="margin: 0;">Dashboard</h2>
-                <button onclick="location.reload()" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500;">🔄 Refresh</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button onclick="location.reload()" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500;">🔄 Refresh</button>
+                    <button onclick="downloadDataBackup()" style="padding: 0.75rem 1.5rem; background: var(--card-bg); color: var(--text-primary); border: 0.5px solid var(--card-border); border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500;">💾 Backup</button>
+                    <button onclick="document.getElementById('restoreInput').click()" style="padding: 0.75rem 1.5rem; background: var(--card-bg); color: var(--text-primary); border: 0.5px solid var(--card-border); border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500;">📂 Restore</button>
+                    <input type="file" id="restoreInput" accept=".json" onchange="restoreDataBackup(event)" style="display: none;">
+                </div>
             </div>
             <div class="card">
                 <h3>Top muscle groups this week</h3>
@@ -496,6 +501,7 @@
       });
       workouts.unshift({ id: Date.now(), date, type: 'back', exercises, duration: document.getElementById('backDuration').value, notes: document.getElementById('backNotes').value, muscle: 'Back' });
       saveData();
+      autoBackup();
       updateHistoryDisplay();
       updateAllDashboards();
       document.querySelector('#backForm form').reset();
@@ -528,6 +534,7 @@
       });
       workouts.unshift({ id: Date.now(), date, type: 'shoulders', exercises, duration: document.getElementById('shouldersDuration').value, notes: document.getElementById('shouldersNotes').value, muscle: 'Shoulders' });
       saveData();
+      autoBackup();
       updateHistoryDisplay();
       updateAllDashboards();
       document.querySelector('#shouldersForm form').reset();
@@ -557,6 +564,7 @@
       });
       workouts.unshift({ id: Date.now(), date, type: 'chest', exercises, duration: document.getElementById('chestDuration').value, notes: document.getElementById('chestNotes').value, muscle: 'Chest' });
       saveData();
+      autoBackup();
       updateHistoryDisplay();
       updateAllDashboards();
       document.querySelector('#chestForm form').reset();
@@ -740,6 +748,100 @@
         saveData();
         updateAllDashboards();
       }
+    }
+
+    function downloadDataBackup() {
+      const backup = {
+        timestamp: new Date().toISOString(),
+        workouts: workouts
+      };
+      
+      const json = JSON.stringify(backup, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Workout_Backup_${new Date().toLocaleDateString('en-US').replace(/\//g, '-')}.json`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    }
+
+    function restoreDataBackup(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const backup = JSON.parse(e.target.result);
+          if (backup.workouts && Array.isArray(backup.workouts)) {
+            workouts = backup.workouts;
+            saveData();
+            updateHistoryDisplay();
+            updateAllDashboards();
+            alert(`✓ Restored ${workouts.length} workouts!`);
+            document.getElementById('restoreInput').value = '';
+          } else {
+            alert('❌ Invalid backup file format');
+          }
+        } catch (error) {
+          alert('❌ Error reading backup file: ' + error.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function autoBackup() {
+      const backup = {
+        timestamp: new Date().toISOString(),
+        workouts: workouts
+      };
+      localStorage.setItem('workoutBackup', JSON.stringify(backup));
+    }
+
+    function downloadWorkoutReport() {
+      if (workouts.length === 0) {
+        alert('No workouts to export yet!');
+        return;
+      }
+
+      let csv = 'Date,Workout,Exercise,Performance,Duration,Notes\n';
+      
+      workouts.forEach(w => {
+        const date = new Date(w.date);
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+        
+        w.exercises.forEach(ex => {
+          let performance = '';
+          
+          if (ex.sets && Array.isArray(ex.sets)) {
+            const repsArray = ex.sets.map(s => s.reps).filter(r => r);
+            const weightsArray = ex.sets.map(s => s.weight).filter(w => w);
+            
+            if (repsArray.length > 0 && weightsArray.length > 0) {
+              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps @ ${weightsArray[0]} lbs`;
+            } else if (repsArray.length > 0) {
+              performance = `${ex.sets.length} sets: ${repsArray.join(',')} reps`;
+            }
+          }
+          
+          if (performance) {
+            csv += `${dateStr},"${w.muscle}","${ex.name}","${performance}",${w.duration},"${w.notes || ''}"\n`;
+          }
+        });
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Workout_Report_${new Date().toLocaleDateString('en-US').replace(/\//g, '-')}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
     }
 
     function downloadWorkoutReport() {
