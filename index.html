@@ -65,6 +65,23 @@
     .set-input { padding: 0.5rem !important; font-size: 14px !important; flex: 1; }
     @media (max-width: 768px) { .set-input { padding: 0.75rem !important; font-size: 16px !important; } }
     .previous-data { text-align: right; font-size: 12px; color: var(--text-secondary); font-style: italic; padding: 0.5rem 0; }
+    .body-part-section { margin-bottom: 2rem; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.02); border: 0.5px solid var(--card-border); }
+    .body-part-header { padding: 1.25rem; background: rgba(0,0,0,0.1); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; font-weight: 600; color: var(--text-primary); transition: background 0.2s; }
+    .body-part-header:hover { background: rgba(0,0,0,0.15); }
+    .body-part-toggle { font-size: 20px; transition: transform 0.2s; }
+    .body-part-content { display: none; padding: 1.25rem; }
+    .body-part-content.expanded { display: block; }
+    .week-block { padding: 1rem; border-radius: 8px; background: rgba(0,0,0,0.05); margin-bottom: 1rem; }
+    .week-block:last-child { margin-bottom: 0; }
+    .week-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+    .week-volume { font-size: 20px; font-weight: 600; color: var(--accent); margin-bottom: 0.75rem; }
+    .progress-container { margin-bottom: 0.75rem; }
+    .progress-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 12px; color: var(--text-secondary); }
+    .progress-percentage { font-weight: 600; color: var(--accent); }
+    .progress-bar { height: 8px; background: rgba(0,0,0,0.2); border-radius: 4px; overflow: hidden; position: relative; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #85b7eb, var(--accent)); background-size: 200% 100%; animation: shimmer 3s infinite; border-radius: 4px; transition: width 0.3s ease; }
+    @keyframes shimmer { 0%, 100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+    .baseline-indicator { font-size: 10px; color: var(--text-secondary); margin-top: 0.25rem; font-style: italic; }
     .timer-section { background: var(--card-bg); border: 0.5px solid var(--card-border); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
     @media (max-width: 768px) { .timer-section { flex-direction: column; align-items: stretch; gap: 0.75rem; } }
     .timer-display { font-size: 32px; font-weight: 600; color: var(--accent); font-family: 'Courier New', monospace; min-width: 150px; text-align: center; }
@@ -440,7 +457,7 @@
         <!-- PROGRESS -->
         <div id="progress" class="section">
             <h2>Progress</h2>
-            <div id="weeklyProgress"></div>
+            <div id="bodyPartProgress"></div>
         </div>
 
         <!-- HISTORY -->
@@ -572,69 +589,106 @@
       alert('Workout logged! 💪');
     }
 
-    function updateWeeklyProgress() {
+    function updateBodyPartProgress() {
       if (workouts.length === 0) {
-        document.getElementById('weeklyProgress').innerHTML = '<div class="card"><p style="text-align: center; color: var(--text-secondary);">Log workouts to see weekly volume breakdown</p></div>';
+        document.getElementById('bodyPartProgress').innerHTML = '<div class="card"><p style="text-align: center; color: var(--text-secondary);">Log workouts to see body part volume tracking</p></div>';
         return;
       }
 
-      const weeks = {};
-      const today = new Date();
-      
+      const bodyParts = ['Chest', 'Back', 'Hamstrings', 'Quads', 'Shoulders', 'Arms'];
+      const bodyPartData = {};
+
+      bodyParts.forEach(bp => {
+        bodyPartData[bp] = {};
+      });
+
+      // Aggregate volume by week and body part
       workouts.forEach(w => {
+        if (!bodyParts.includes(w.muscle)) return;
+
         const workoutDate = new Date(w.date);
         const dayOfWeek = workoutDate.getDay();
         const diff = workoutDate.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
         const weekStart = new Date(workoutDate.setDate(diff));
         const weekKey = weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        
-        if (!weeks[weekKey]) {
-          weeks[weekKey] = { total: 0, bodyParts: {} };
+
+        if (!bodyPartData[w.muscle][weekKey]) {
+          bodyPartData[w.muscle][weekKey] = 0;
         }
-        
+
         w.exercises.forEach(ex => {
-          let volume = 0;
           if (ex.sets && Array.isArray(ex.sets)) {
             ex.sets.forEach(set => {
-              volume += (parseInt(set.weight) || 0) * (parseInt(set.reps) || 0);
+              bodyPartData[w.muscle][weekKey] += (parseInt(set.weight) || 0) * (parseInt(set.reps) || 0);
             });
           }
-          weeks[weekKey].total += volume;
-          
-          if (!weeks[weekKey].bodyParts[w.muscle]) {
-            weeks[weekKey].bodyParts[w.muscle] = 0;
-          }
-          weeks[weekKey].bodyParts[w.muscle] += volume;
         });
       });
 
-      const sortedWeeks = Object.entries(weeks).reverse();
-      
       let html = '';
-      sortedWeeks.forEach(([weekLabel, data], index) => {
-        html += `
-          <div class="card">
-            <h3>Week ${index + 1} (${weekLabel})</h3>
-            <div style="margin-bottom: 1rem;">
-              <div style="font-size: 18px; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem;">Total Volume: ${data.total.toLocaleString()} lbs</div>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-        `;
+
+      bodyParts.forEach(bodyPart => {
+        const weeks = bodyPartData[bodyPart];
+        const weekEntries = Object.entries(weeks).sort((a, b) => {
+          const dateA = new Date(a[0]);
+          const dateB = new Date(b[0]);
+          return dateB - dateA;
+        });
+
+        if (weekEntries.length === 0) {
+          return; // Skip if no data for this body part
+        }
+
+        const firstWeekVolume = weekEntries[weekEntries.length - 1][1]; // Oldest week is baseline
         
-        Object.entries(data.bodyParts).forEach(([muscle, volume]) => {
+        html += `
+          <div class="body-part-section">
+            <div class="body-part-header" onclick="toggleBodyPart(this)">
+              <span>${bodyPart}</span>
+              <span class="body-part-toggle">▼</span>
+            </div>
+            <div class="body-part-content expanded">
+        `;
+
+        let weekNum = weekEntries.length;
+        weekEntries.forEach(([weekLabel, volume]) => {
+          const percentage = (volume / firstWeekVolume) * 100;
+          const isBaseline = weekNum === weekEntries.length;
+          
           html += `
-            <div style="padding: 1rem; background: rgba(0,0,0,0.05); border-radius: 8px; border-left: 4px solid var(--accent);">
-              <div style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem;">${muscle}</div>
-              <div style="font-size: 20px; font-weight: 600; color: var(--accent);">${volume.toLocaleString()}</div>
-              <div style="font-size: 11px; color: var(--text-secondary); margin-top: 0.25rem;">lbs</div>
+            <div class="week-block">
+              <div class="week-label">Week ${weekNum} (${weekLabel})</div>
+              <div class="week-volume">${volume.toLocaleString()} lbs</div>
+              <div class="progress-container">
+                <div class="progress-label">
+                  <span>Progress vs Baseline</span>
+                  <span class="progress-percentage">${percentage.toFixed(0)}%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: ${Math.min(percentage, 150)}%;"></div>
+                </div>
+                ${isBaseline ? '<div class="baseline-indicator">📍 Baseline Week</div>' : ''}
+              </div>
             </div>
           `;
+          
+          weekNum--;
         });
-        
-        html += `</div></div>`;
+
+        html += `
+            </div>
+          </div>
+        `;
       });
-      
-      document.getElementById('weeklyProgress').innerHTML = html;
+
+      document.getElementById('bodyPartProgress').innerHTML = html || '<div class="card"><p style="text-align: center; color: var(--text-secondary);">No workouts logged yet</p></div>';
+    }
+
+    function toggleBodyPart(header) {
+      const content = header.nextElementSibling;
+      content.classList.toggle('expanded');
+      const toggle = header.querySelector('.body-part-toggle');
+      toggle.textContent = content.classList.contains('expanded') ? '▼' : '▶';
     }
 
     function updateAllDashboards() {
@@ -647,7 +701,7 @@
       document.getElementById('pr').textContent = maxW > 0 ? maxW + ' lbs' : '—';
       document.getElementById('recentWorkout').innerHTML = workouts.length > 0 ? `<p>${workouts[0].muscle} - ${new Date(workouts[0].date).toLocaleDateString()}</p>` : '<p>No workouts yet</p>';
       updateTopMuscles();
-      updateWeeklyProgress();
+      updateBodyPartProgress();
       updateHistoryTimeline();
     }
 
