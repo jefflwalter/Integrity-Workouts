@@ -1,2 +1,492 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>💪 Workout Tracker</title><style>:root{--card-bg:#fff;--card-border:#d3d1c7;--text-primary:#2c2c2a;--text-secondary:#888780;--accent:#185FA5;--accent-light:#E6F1FB}@media(prefers-color-scheme:dark){:root{--card-bg:#1a1a18;--card-border:#444441;--text-primary:#e8e6dc;--text-secondary:#a8a79f;--accent:#85b7eb;--accent-light:#0c2a40}}*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--card-bg);color:var(--text-primary);line-height:1.6;font-size:16px}.container{max-width:1200px;margin:0 auto;padding:1.5rem}@media(max-width:768px){.container{padding:1rem}}.header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--card-border)}.header h1{font-size:32px;margin-bottom:.5rem}@media(max-width:768px){.header h1{font-size:28px}}.update-banner{background:var(--accent-light);border:.5px solid rgba(24,95,165,.2);border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-size:13px;color:var(--text-secondary)}.update-banner strong{color:var(--accent)}.nav-tabs{display:flex;gap:0;border-bottom:1px solid var(--card-border);margin-bottom:2rem;overflow-x:auto;position:sticky;top:0;background:var(--card-bg);z-index:100;flex-wrap:nowrap}@media(max-width:768px){.nav-tabs{margin-bottom:1rem}}.tab-btn{padding:1.25rem 1.5rem;background:0;border:0;color:var(--text-secondary);cursor:pointer;font-size:16px;font-weight:500;border-bottom:3px solid transparent;transition:all .3s;white-space:nowrap;flex-shrink:0;min-width:50%}@media(max-width:768px){.tab-btn{padding:1rem 1.25rem;font-size:16px}}.tab-btn:hover{color:var(--text-primary)}.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}.section{display:none}.section.active{display:block}.card{background:var(--card-bg);border:.5px solid var(--card-border);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}.card h3{margin:0 0 .5rem 0;font-size:16px;font-weight:500;color:var(--text-primary)}.card p{margin:0 0 .75rem 0;font-size:14px;color:var(--text-secondary);line-height:1.5}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem}.stat-value{font-size:32px;font-weight:600;color:var(--accent);margin-top:.5rem}.workout-form{display:none}.workout-form.active{display:block}.form-group{display:flex;flex-direction:column;margin-bottom:1rem}.form-group label{font-size:12px;font-weight:500;margin-bottom:.5rem;color:var(--text-primary);text-transform:uppercase;letter-spacing:.5px}.form-group input,.form-group textarea{padding:.75rem;border:.5px solid var(--card-border);border-radius:6px;background:var(--card-bg);color:var(--text-primary);font-size:14px;font-family:inherit}.form-group textarea{resize:vertical}.exercise-box{background:rgba(255,255,255,.5);border:.5px solid rgba(0,0,0,.1);border-radius:8px;padding:1rem;margin-bottom:1.5rem}@media(prefers-color-scheme:dark){.exercise-box{background:rgba(0,0,0,.2)}}.exercise-box h4{font-size:15px;font-weight:500;margin-bottom:.5rem;color:var(--text-primary)}.exercise-label{font-size:12px;color:var(--text-secondary);margin-bottom:1rem}.set-header{cursor:pointer;padding:.75rem;background:rgba(255,255,255,.3);border-radius:6px;margin-bottom:.5rem;display:flex;justify-content:space-between;align-items:center;user-select:none;font-weight:600;color:var(--text-primary)}.set-header:hover{background:rgba(255,255,255,.5)}.set-header-toggle{font-size:18px;transition:transform .2s}.set-row{display:none;grid-template-columns:70px 1fr 120px;gap:1rem;align-items:end;margin-bottom:.5rem;padding:.75rem;background:rgba(255,255,255,.3);border-radius:6px}.set-row.expanded{display:grid}@media(max-width:768px){.set-row{grid-template-columns:1fr;gap:.5rem}}.set-input{padding:.5rem!important;font-size:14px!important;flex:1}.superset-group{border-left:4px solid var(--accent);padding-left:1rem;margin:2rem 0;padding-top:.5rem;padding-bottom:.5rem}.superset-label{font-size:11px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem}.superset-rest{font-size:12px;color:var(--text-secondary);margin-bottom:1rem;padding:.5rem;background:rgba(0,0,0,.05);border-radius:4px;font-style:italic}.superset-rest-end{font-size:12px;color:var(--text-secondary);margin-top:1rem;padding:.5rem;background:rgba(0,0,0,.05);border-radius:4px;font-style:italic;text-align:center}.timer-section{background:var(--card-bg);border:.5px solid var(--card-border);border-radius:8px;padding:1rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}@media(max-width:768px){.timer-section{flex-direction:column;align-items:stretch;gap:.75rem}}.timer-display{font-size:32px;font-weight:600;color:var(--accent);font-family:'Courier New',monospace;min-width:150px;text-align:center}.timer-controls{display:flex;gap:.5rem}button[type="submit"]{width:100%;padding:1rem;font-size:16px;font-weight:600;background:var(--accent);color:white;border:0;border-radius:8px;cursor:pointer}button[type="submit"]:hover{opacity:.9}</style></head><body><div class="container"><div class="header"><h1>💪 Workout Tracker</h1><p>Track your progress, crush your goals</p></div><div class="update-banner"><strong>Last updated:</strong> Today · Quads and Arms workouts added</div><div class="nav-tabs"><button class="tab-btn active" data-tab="dashboard">Dashboard</button><button class="tab-btn" data-tab="workouts">Workouts</button><button class="tab-btn" data-tab="history">History</button></div><div id="dashboard" class="section active"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem"><h2 style="margin:0">Dashboard</h2><div style="display:flex;gap:.5rem;flex-wrap:wrap"><button onclick="location.reload()" style="padding:.75rem 1rem;background:var(--accent);color:white;border:0;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;white-space:nowrap">🔄 Refresh</button><button onclick="downloadDataBackup()" style="padding:.75rem 1rem;background:var(--card-bg);color:var(--text-primary);border:.5px solid var(--card-border);border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;white-space:nowrap">💾 Backup</button><button onclick="document.getElementById('restoreInput').click()" style="padding:.75rem 1rem;background:var(--card-bg);color:var(--text-primary);border:.5px solid var(--card-border);border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;white-space:nowrap">📂 Restore</button><input type="file" id="restoreInput" accept=".json" onchange="restoreDataBackup(event)" style="display:none"></div></div><div class="card"><h3>Stats this week</h3><div id="topMuscles" style="text-align:center;color:var(--text-secondary)">Log workouts to see your stats</div></div><div class="card-grid"><div class="card"><h3>Workouts</h3><div class="stat-value" id="weekWorkouts">0</div></div><div class="card"><h3>Total time</h3><div class="stat-value" id="totalTime">0 min</div></div><div class="card"><h3>PR</h3><div class="stat-value" id="pr">—</div></div></div><div class="card"><h3>Most recent</h3><div id="recentWorkout" style="text-align:center;color:var(--text-secondary)">No workouts yet</div></div></div><div id="workouts" class="section"><h3 style="margin-bottom:1rem">Select workout</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:1rem;margin-bottom:1.5rem"><button onclick="selectWorkoutType('back')" id="backBtn" style="padding:1rem;background:var(--accent);color:white;border:0;border-radius:8px;font-weight:500;cursor:pointer">📍 Back</button><button onclick="selectWorkoutType('quads')" id="quadsBtn" style="padding:1rem;background:var(--card-bg);color:var(--text-primary);border:.5px solid var(--card-border);border-radius:8px;font-weight:500;cursor:pointer">🦵 Quads</button><button onclick="selectWorkoutType('arms')" id="armsBtn" style="padding:1rem;background:var(--card-bg);color:var(--text-primary);border:.5px solid var(--card-border);border-radius:8px;font-weight:500;cursor:pointer">💯 Arms</button></div><div id="backForm" class="workout-form active"><form onsubmit="logWorkout(event,'back')"><div class="form-group"><label>Date & Time</label><input type="datetime-local" id="backDate" required></div><div class="timer-section"><div class="timer-display" id="backTimer">00:00:00</div><div class="timer-controls"><button type="button" id="backStartBtn" onclick="startTimer('back')" style="padding:.5rem 1rem;background:#4CAF50;color:white;border:0;border-radius:6px;cursor:pointer;font-weight:500">▶️ Start</button><button type="button" id="backStopBtn" onclick="stopTimer('back')" style="padding:.5rem 1rem;background:#d32f2f;color:white;border:0;border-radius:6px;cursor:pointer;font-weight:500;display:none">⏹️ Stop</button></div></div><div class="exercise-box"><h4>Small Neutral Grip Lat Pulldown</h4><div class="exercise-label">4 sets x 6-10 reps • 140 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="back_ex1_s1_reps" min="1"><input type="number" class="set-input" id="back_ex1_s1_weight" step="0.5" value="140"></div></div></div><div class="superset-group"><div class="superset-label">Superset</div><div class="superset-rest">⏱️ 30 sec rest</div><div class="exercise-box"><h4>Single Arm High Row</h4><div class="exercise-label">4 sets x 10 reps • 70 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="back_ex2_s1_reps" min="1"><input type="number" class="set-input" id="back_ex2_s1_weight" step="0.5" value="70"></div></div></div><div class="exercise-box"><h4>Small Seated Cable Row</h4><div class="exercise-label">4 sets x 12-15 reps • 80 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="back_ex3_s1_reps" min="1"><input type="number" class="set-input" id="back_ex3_s1_weight" step="0.5" value="80"></div></div></div><div class="exercise-box"><h4>DB Single Arm Row</h4><div class="exercise-label">4 sets x 10 reps • 40 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="back_ex4_s1_reps" min="1"><input type="number" class="set-input" id="back_ex4_s1_weight" step="0.5" value="40"></div></div></div><div class="superset-rest-end">⏱️ 90 sec rest</div></div><div class="exercise-box"><h4>Cable Lat Pullover</h4><div class="exercise-label">3 sets x 10 reps • 70 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-3</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="back_ex5_s1_reps" min="1"><input type="number" class="set-input" id="back_ex5_s1_weight" step="0.5" value="70"></div></div></div><div class="form-group"><label>Duration (min)</label><input type="number" id="backDuration" min="1" value="60"></div><div class="form-group"><label>Notes</label><textarea id="backNotes" style="height:80px"></textarea></div><button type="submit">✓ Log Back Workout</button></form></div><div id="quadsForm" class="workout-form"><form onsubmit="logWorkout(event,'quads')"><div class="form-group"><label>Date & Time</label><input type="datetime-local" id="quadsDate" required></div><div class="timer-section"><div class="timer-display" id="quadsTimer">00:00:00</div><div class="timer-controls"><button type="button" id="quadsStartBtn" onclick="startTimer('quads')" style="padding:.5rem 1rem;background:#4CAF50;color:white;border:0;border-radius:6px;cursor:pointer;font-weight:500">▶️ Start</button><button type="button" id="quadsStopBtn" onclick="stopTimer('quads')" style="padding:.5rem 1rem;background:#d32f2f;color:white;border:0;border-radius:6px;cursor:pointer;font-weight:500;display:none">⏹️ Stop</button></div></div><div class="superset-group"><div class="superset-label">Superset 1</div><div class="superset-rest">⏱️ 30 sec rest</div><div class="exercise-box"><h4>Goblet Squat</h4><div class="exercise-label">4 sets x 10 reps • 70 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="qu_ex1_s1_reps"><input type="number" class="set-input" id="qu_ex1_s1_weight" value="70"></div></div></div><div class="exercise-box"><h4>Bodyweight Lunges</h4><div class="exercise-label">4 sets x 15 reps/side</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps/Side</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="qu_ex2_s1_reps" value="15"><input type="number" class="set-input" id="qu_ex2_s1_weight" value="0"></div></div></div><div class="superset-rest-end">⏱️ 90 sec rest</div></div><div class="superset-group"><div class="superset-label">Superset 2</div><div class="superset-rest">⏱️ 30 sec rest</div><div class="exercise-box"><h4>Hack Squat</h4><div class="exercise-label">4 sets x 10 reps</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="qu_ex3_s1_reps"><input type="number" class="set-input" id="qu_ex3_s1_weight" value="0"></div></div></div><div class="exercise-box"><h4>Leg Extension</h4><div class="exercise-label">4 sets x 10 reps • Heavy</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="qu_ex4_s1_reps"><input type="text" class="set-input" id="qu_ex4_s1_weight" placeholder="Weight"></div></div></div><div class="exercise-box"><h4>Air Squats</h4><div class="exercise-label">4 sets x 20 reps</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="qu_ex5_s1_reps" value="20"><input type="number" class="set-input" id="qu_ex5_s1_weight" value="0"></div></div></div><div class="superset-rest-end">⏱️ 90 sec rest</div></div><div class="form-group"><label>Duration (min)</label><input type="number" id="quadsDuration" min="1" value="60"></div><div class="form-group"><label>Notes</label><textarea id="quadsNotes" style="height:80px"></textarea></div><button type="submit">✓ Log Quads Workout</button></form></div><div id="armsForm" class="workout-form"><form onsubmit="logWorkout(event,'arms')"><div class="form-group"><label>Date & Time</label><input type="datetime-local" id="armsDate" required></div><div class="timer-section"><div class="timer-display" id="armsTimer">00:00:00</div><div class="timer-controls"><button type="button" id="armsStartBtn" onclick="startTimer('arms')" style="padding:.5rem 1rem;background:#4CAF50;color:white;border:0;border-radius:6px;cursor:pointer;font-weight:500">▶️ Start</button><button type="button" id="armsStopBtn" onclick="stopTimer('arms')" style="padding:.5rem 1rem;background:#d32f2f;color:white;border:0;border-radius:6px;cursor:pointer;font-weight:500;display:none">⏹️ Stop</button></div></div><div class="superset-group"><div class="superset-label">Superset 1</div><div class="superset-rest">⏱️ 30 sec rest</div><div class="exercise-box"><h4>Hammer Curls</h4><div class="exercise-label">4 sets x 20 reps • 15 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex1_s1_reps" value="20"><input type="number" class="set-input" id="ar_ex1_s1_weight" value="15"></div></div></div><div class="exercise-box"><h4>Brachialis Curl</h4><div class="exercise-label">4 sets x 10 reps/arm • 15 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps/Arm</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex2_s1_reps" value="10"><input type="number" class="set-input" id="ar_ex2_s1_weight" value="15"></div></div></div><div class="exercise-box"><h4>RB Curls</h4><div class="exercise-label">4 sets x 30 sec • Green</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Sec</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex3_s1_reps" value="30"><input type="text" class="set-input" id="ar_ex3_s1_weight" value="Green"></div></div></div><div class="exercise-box"><h4>Skullcrushers</h4><div class="exercise-label">4 sets x 10 reps • 25 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex4_s1_reps" value="10"><input type="number" class="set-input" id="ar_ex4_s1_weight" value="25"></div></div></div><div class="superset-rest-end">⏱️ 90 sec rest</div></div><div class="superset-group"><div class="superset-label">Superset 2</div><div class="superset-rest">⏱️ 30 sec rest</div><div class="exercise-box"><h4>V-Bar Pushdown</h4><div class="exercise-label">4 sets x 20 reps • 60 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex5_s1_reps" value="20"><input type="number" class="set-input" id="ar_ex5_s1_weight" value="60"></div></div></div><div class="exercise-box"><h4>Underhand Single Arm Pulldown</h4><div class="exercise-label">4 sets x 10 reps/arm • 20 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps/Arm</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex6_s1_reps" value="10"><input type="number" class="set-input" id="ar_ex6_s1_weight" value="20"></div></div></div><div class="exercise-box"><h4>RB Pulldown</h4><div class="exercise-label">4 sets x 30 sec</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Sec</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex7_s1_reps" value="30"><input type="text" class="set-input" id="ar_ex7_s1_weight" placeholder="Band"></div></div></div><div class="exercise-box"><h4>Barbell Curl</h4><div class="exercise-label">4 sets x 10 reps • 5 lbs/side</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Reps</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex8_s1_reps" value="10"><input type="number" class="set-input" id="ar_ex8_s1_weight" value="5"></div></div></div><div class="superset-rest-end">⏱️ 90 sec rest</div></div><div class="superset-group"><div class="superset-label">Finisher</div><div class="exercise-box"><h4>Push-Up Hold</h4><div class="exercise-label">1 set x 30 sec</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Sec</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex9_s1_reps" value="30"><input type="number" class="set-input" id="ar_ex9_s1_weight" value="0"></div></div></div><div class="exercise-box"><h4>Barbell 90° Hold</h4><div class="exercise-label">1 set x 30 sec</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1</span><span class="set-header-toggle">▶</span></div><div class="set-row"><div><div class="set-label">Sec</div></div><div style="display:flex;gap:.5rem"><input type="number" class="set-input" id="ar_ex10_s1_reps" value="30"><input type="number" class="set-input" id="ar_ex10_s1_weight" value="0"></div></div></div></div><div class="form-group"><label>Duration (min)</label><input type="number" id="armsDuration" min="1" value="60"></div><div class="form-group"><label>Notes</label><textarea id="armsNotes" style="height:80px"></textarea></div><button type="submit">✓ Log Arms Workout</button></form></div></div><div id="history" class="section"><h2>History</h2><div class="card"><div id="historyTimeline" style="text-align:center;color:var(--text-secondary)">No workouts logged yet</div></div></div></div><script>const STORAGE_KEY='workoutTrackerData';let workouts=[];let timerSeconds={back:0,quads:0,arms:0};let timerIntervals={};let timerActive={};function toggleSet(h){const r=h.nextElementSibling;if(r){r.classList.toggle('expanded');const tog=h.querySelector('.set-header-toggle');if(tog)tog.textContent=r.classList.contains('expanded')?'▼':'▶'}}function selectWorkoutType(t){['back','quads','arms'].forEach(w=>{const form=document.getElementById(w+'Form');const btn=document.getElementById(w+'Btn');if(form)form.classList.remove('active');if(btn){btn.style.background='var(--card-bg)';btn.style.color='var(--text-primary)'}});const form=document.getElementById(t+'Form');const btn=document.getElementById(t+'Btn');if(form)form.classList.add('active');if(btn){btn.style.background='var(--accent)';btn.style.color='white'}}function logWorkout(e,type){e.preventDefault();const dateEl=document.getElementById(type+'Date');const durationEl=document.getElementById(type+'Duration');const notesEl=document.getElementById(type+'Notes');if(!dateEl||!durationEl||!notesEl)return;const date=dateEl.value;const duration=durationEl.value;const notes=notesEl.value;const exercises=collectExercises(type);workouts.unshift({id:Date.now(),date,type,exercises,duration,notes,muscle:getMuscle(type)});saveData();updateAllDashboards();const formEl=document.querySelector('#'+type+'Form form');if(formEl)formEl.reset();setDefaultDates();alert('Workout logged! 💪')}function collectExercises(type){const exercises=[];const mapping={back:[{id:'back_ex1',name:'Small Neutral Grip Lat Pulldown',sets:4},{id:'back_ex2',name:'Single Arm High Row',sets:4},{id:'back_ex3',name:'Small Seated Cable Row',sets:4},{id:'back_ex4',name:'DB Single Arm Row',sets:4},{id:'back_ex5',name:'Cable Lat Pullover',sets:3}],quads:[{id:'qu_ex1',name:'Goblet Squat',sets:4},{id:'qu_ex2',name:'Bodyweight Lunges',sets:4},{id:'qu_ex3',name:'Hack Squat',sets:4},{id:'qu_ex4',name:'Leg Extension',sets:4},{id:'qu_ex5',name:'Air Squats',sets:4}],arms:[{id:'ar_ex1',name:'Hammer Curls',sets:4},{id:'ar_ex2',name:'Brachialis Curl',sets:4},{id:'ar_ex3',name:'RB Curls',sets:4},{id:'ar_ex4',name:'Skullcrushers',sets:4},{id:'ar_ex5',name:'V-Bar Pushdown',sets:4},{id:'ar_ex6',name:'Underhand Single Arm Pulldown',sets:4},{id:'ar_ex7',name:'RB Pulldown',sets:4},{id:'ar_ex8',name:'Barbell Curl',sets:4},{id:'ar_ex9',name:'Push-Up Hold',sets:1},{id:'ar_ex10',name:'Barbell 90° Hold',sets:1}]};const exList=mapping[type]||[];exList.forEach(ex=>{const sets=[];for(let i=1;i<=ex.sets;i++){const repEl=document.getElementById(ex.id+'_s'+i+'_reps');const wEl=document.getElementById(ex.id+'_s'+i+'_weight');if(repEl&&wEl){const reps=repEl.value;const weight=wEl.value;if(reps)sets.push({reps,weight})}}if(sets.length>0)exercises.push({name:ex.name,sets})});return exercises}function getMuscle(type){const map={back:'Back',quads:'Quads',arms:'Arms'};return map[type]||'Unknown'}function updateAllDashboards(){const tw=workouts.filter(w=>new Date(w.date)>=new Date(Date.now()-7*24*60*60*1000));const weekEl=document.getElementById('weekWorkouts');if(weekEl)weekEl.textContent=tw.length;const totalEl=document.getElementById('totalTime');if(totalEl)totalEl.textContent=workouts.reduce((s,w)=>s+parseInt(w.duration||0),0)+' min';let maxW=0;workouts.forEach(w=>w.exercises.forEach(ex=>{if(ex.sets)ex.sets.forEach(s=>{if(s.weight&&parseInt(s.weight)>maxW)maxW=parseInt(s.weight)})}));const prEl=document.getElementById('pr');if(prEl)prEl.textContent=maxW>0?maxW+' lbs':'—';const recEl=document.getElementById('recentWorkout');if(recEl)recEl.innerHTML=workouts.length>0?`<p><strong>${workouts[0].muscle}</strong> - ${new Date(workouts[0].date).toLocaleDateString()}</p>`:'<p>No workouts yet</p>';updateHistoryTimeline()}function updateHistoryTimeline(){const c=document.getElementById('historyTimeline');if(c)c.innerHTML=workouts.length>0?workouts.map(w=>`<div style="padding:1rem;border-bottom:1px solid var(--card-border);display:flex;justify-content:space-between;align-items:center"><div><strong>${w.muscle}</strong> - ${new Date(w.date).toLocaleDateString()} | ${w.duration} min</div><button onclick="deleteWorkout(${w.id})" style="padding:.25rem .75rem;background:#d32f2f;color:white;border:0;border-radius:4px;font-size:12px;cursor:pointer">Delete</button></div>`).join(''):'<p style="text-align:center;color:var(--text-secondary)">No workouts logged yet</p>'}function deleteWorkout(id){if(confirm('Delete this workout?')){workouts=workouts.filter(w=>w.id!==id);saveData();updateAllDashboards()}}function startTimer(type){if(timerActive[type])return;timerActive[type]=true;const startBtn=document.getElementById(type+'StartBtn');const stopBtn=document.getElementById(type+'StopBtn');if(startBtn)startBtn.style.display='none';if(stopBtn)stopBtn.style.display='inline-block';timerIntervals[type]=setInterval(()=>{timerSeconds[type]++;const h=Math.floor(timerSeconds[type]/3600);const m=Math.floor((timerSeconds[type]%3600)/60);const s=timerSeconds[type]%60;const timerEl=document.getElementById(type+'Timer');if(timerEl)timerEl.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`},1000)}function stopTimer(type){if(!timerActive[type])return;timerActive[type]=false;clearInterval(timerIntervals[type]);const startBtn=document.getElementById(type+'StartBtn');const stopBtn=document.getElementById(type+'StopBtn');if(startBtn)startBtn.style.display='inline-block';if(stopBtn)stopBtn.style.display='none'}function downloadDataBackup(){const backup={timestamp:new Date().toISOString(),workouts};const json=JSON.stringify(backup,null,2);const blob=new Blob([json],{type:'application/json'});const url=window.URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`Workout_Backup_${new Date().toLocaleDateString('en-US').replace(/\//g,'-')}.json`;document.body.appendChild(a);a.click();window.URL.revokeObjectURL(url);document.body.removeChild(a)}function restoreDataBackup(event){const file=event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(e){try{const backup=JSON.parse(e.target.result);if(backup.workouts&&Array.isArray(backup.workouts)){workouts=backup.workouts;saveData();updateAllDashboards();alert(`Restored ${workouts.length} workouts!`);const inp=document.getElementById('restoreInput');if(inp)inp.value=''}}catch(error){alert('Error: '+error.message)}};reader.readAsText(file)}function loadData(){const saved=localStorage.getItem(STORAGE_KEY);if(saved)try{workouts=JSON.parse(saved)}catch(e){}setDefaultDates();updateAllDashboards()}function saveData(){localStorage.setItem(STORAGE_KEY,JSON.stringify(workouts))}function setDefaultDates(){const now=new Date();const year=now.getFullYear();const month=String(now.getMonth()+1).padStart(2,'0');const day=String(now.getDate()).padStart(2,'0');const hours=String(now.getHours()).padStart(2,'0');const minutes=String(now.getMinutes()).padStart(2,'0');const dt=`${year}-${month}-${day}T${hours}:${minutes}`;['back','quads','arms'].forEach(t=>{const el=document.getElementById(t+'Date');if(el)el.value=dt})}document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',function(){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));const tab=this.getAttribute('data-tab');const section=document.getElementById(tab);if(section)section.classList.add('active');this.classList.add('active');window.scrollTo(0,0)})});selectWorkoutType('back');loadData();</script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💪 Integrity Workouts</title>
+  <style>
+    :root {
+      --card-bg: #ffffff;
+      --card-border: #d3d1c7;
+      --text-primary: #2c2c2a;
+      --text-secondary: #888780;
+      --accent: #185FA5;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --card-bg: #1a1a18;
+        --card-border: #444441;
+        --text-primary: #e8e6dc;
+        --text-secondary: #a8a79f;
+        --accent: #85b7eb;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+    .header { margin-bottom: 2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem; }
+    .header h1 { font-size: 32px; margin-bottom: 0.5rem; }
+    .nav-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--card-border); margin-bottom: 2rem; }
+    .tab-btn { 
+      padding: 1.25rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+    .tab-btn:hover { color: var(--text-primary); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .section { display: none; }
+    .section.active { display: block; }
+    .card { 
+      background: var(--card-bg);
+      border: 0.5px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .card h3 { font-size: 16px; font-weight: 500; margin-bottom: 0.5rem; }
+    .stat-value { font-size: 32px; font-weight: 600; color: var(--accent); margin-top: 0.5rem; }
+    .exercise-box { 
+      background: rgba(255,255,255,0.5);
+      border: 0.5px solid rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .exercise-box h4 { font-size: 15px; font-weight: 500; margin-bottom: 0.5rem; }
+    .exercise-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 1rem; }
+    .set-header { 
+      cursor: pointer;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.3);
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      user-select: none;
+    }
+    .set-header:hover { background: rgba(255,255,255,0.5); }
+    .set-row { 
+      display: none;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.3);
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+    .set-row.expanded { display: flex; }
+    .set-input { 
+      padding: 0.5rem;
+      border: 0.5px solid var(--card-border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      flex: 1;
+    }
+    .superset-group { 
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+      margin: 2rem 0;
+    }
+    .superset-label { 
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .superset-rest { 
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background: rgba(0,0,0,0.05);
+      border-radius: 4px;
+      font-style: italic;
+    }
+    .timer-display { 
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { 
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      display: block;
+    }
+    .form-group input, .form-group textarea { 
+      width: 100%;
+      padding: 0.75rem;
+      border: 0.5px solid var(--card-border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      font-family: inherit;
+    }
+    button[type="submit"] { 
+      width: 100%;
+      padding: 1rem;
+      font-size: 16px;
+      font-weight: 600;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover { opacity: 0.9; }
+    button { padding: 0.75rem 1rem; margin: 0.25rem; }
+    .controls { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>💪 Integrity Workouts</h1>
+    <p>Track your progress with Quads, Back & Arms</p>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
+    <button class="tab-btn" onclick="switchTab('workouts')">Workouts</button>
+    <button class="tab-btn" onclick="switchTab('history')">History</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="section active">
+    <div class="controls">
+      <button onclick="location.reload()">🔄 Refresh</button>
+      <button onclick="downloadBackup()">💾 Backup</button>
+      <button onclick="document.getElementById('restoreFile').click()">📂 Restore</button>
+      <input type="file" id="restoreFile" accept=".json" onchange="restoreBackup(event)" style="display:none">
+    </div>
+
+    <div class="card-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+      <div class="card">
+        <h3>This Week</h3>
+        <div class="stat-value" id="weekCount">0</div>
+        <p>Workouts logged</p>
+      </div>
+      <div class="card">
+        <h3>Total Time</h3>
+        <div class="stat-value" id="totalTime">0</div>
+        <p>Minutes</p>
+      </div>
+      <div class="card">
+        <h3>PR</h3>
+        <div class="stat-value" id="maxWeight">—</div>
+        <p>Heaviest lift</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Most Recent</h3>
+      <div id="recentWorkout" style="color: var(--text-secondary); text-align: center;">No workouts yet</div>
+    </div>
+  </div>
+
+  <!-- WORKOUTS -->
+  <div id="workouts" class="section">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+      <button onclick="selectWorkout('back')" id="backBtn" style="padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;">📍 Back</button>
+      <button onclick="selectWorkout('quads')" id="quadsBtn" style="padding: 1rem; background: var(--card-bg); color: var(--text-primary); border: 0.5px solid var(--card-border); border-radius: 8px; font-weight: 500; cursor: pointer;">🦵 Quads</button>
+      <button onclick="selectWorkout('arms')" id="armsBtn" style="padding: 1rem; background: var(--card-bg); color: var(--text-primary); border: 0.5px solid var(--card-border); border-radius: 8px; font-weight: 500; cursor: pointer;">💯 Arms</button>
+    </div>
+
+    <!-- BACK FORM -->
+    <div id="backForm" class="workout-form" style="display: block;">
+      <form onsubmit="logWorkout(event, 'back')">
+        <div class="form-group">
+          <label>Date & Time</label>
+          <input type="datetime-local" id="backDate" required>
+        </div>
+        <div class="timer-display" id="backTimer">00:00:00</div>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <button type="button" onclick="startTimer('back')" id="backStart" style="flex: 1;">▶️ Start</button>
+          <button type="button" onclick="stopTimer('back')" id="backStop" style="flex: 1; display: none;">⏹️ Stop</button>
+        </div>
+
+        <div class="exercise-box">
+          <h4>Small Neutral Grip Lat Pulldown</h4>
+          <div class="exercise-label">4 sets x 6-10 reps • 140 lbs</div>
+          <div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div>
+          <div class="set-row"><input type="number" class="set-input" id="back_ex1_reps" min="1" placeholder="Reps"><input type="number" class="set-input" id="back_ex1_weight" value="140" step="0.5"></div>
+        </div>
+
+        <div class="superset-group">
+          <div class="superset-label">Superset</div>
+          <div class="superset-rest">⏱️ 30 sec rest between exercises</div>
+          <div class="exercise-box"><h4>Single Arm High Row</h4><div class="exercise-label">4 sets x 10 reps • 70 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="back_ex2_reps" min="1"><input type="number" class="set-input" id="back_ex2_weight" value="70" step="0.5"></div></div>
+          <div class="exercise-box"><h4>Small Seated Cable Row</h4><div class="exercise-label">4 sets x 12-15 reps • 80 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="back_ex3_reps" min="1"><input type="number" class="set-input" id="back_ex3_weight" value="80" step="0.5"></div></div>
+          <div class="exercise-box"><h4>DB Single Arm Row</h4><div class="exercise-label">4 sets x 10 reps • 40 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="back_ex4_reps" min="1"><input type="number" class="set-input" id="back_ex4_weight" value="40" step="0.5"></div></div>
+        </div>
+
+        <div class="exercise-box">
+          <h4>Cable Lat Pullover</h4>
+          <div class="exercise-label">3 sets x 10 reps • 70 lbs</div>
+          <div class="set-header" onclick="toggleSet(this)"><span>Set 1-3</span><span>▶</span></div>
+          <div class="set-row"><input type="number" class="set-input" id="back_ex5_reps" min="1"><input type="number" class="set-input" id="back_ex5_weight" value="70" step="0.5"></div>
+        </div>
+
+        <div class="form-group"><label>Duration (min)</label><input type="number" id="backDuration" min="1" value="60"></div>
+        <div class="form-group"><label>Notes</label><textarea id="backNotes" style="height: 80px;"></textarea></div>
+        <button type="submit">✓ Log Back Workout</button>
+      </form>
+    </div>
+
+    <!-- QUADS FORM -->
+    <div id="quadsForm" class="workout-form" style="display: none;">
+      <form onsubmit="logWorkout(event, 'quads')">
+        <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="quadsDate" required></div>
+        <div class="timer-display" id="quadsTimer">00:00:00</div>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <button type="button" onclick="startTimer('quads')" id="quadsStart" style="flex: 1;">▶️ Start</button>
+          <button type="button" onclick="stopTimer('quads')" id="quadsStop" style="flex: 1; display: none;">⏹️ Stop</button>
+        </div>
+
+        <div class="superset-group"><div class="superset-label">Superset 1</div><div class="superset-rest">⏱️ 30 sec rest</div>
+          <div class="exercise-box"><h4>Goblet Squat</h4><div class="exercise-label">4 sets x 10 reps • 70 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="qu_ex1_reps" min="1"><input type="number" class="set-input" id="qu_ex1_weight" value="70"></div></div>
+          <div class="exercise-box"><h4>Bodyweight Lunges</h4><div class="exercise-label">4 sets x 15 reps/side</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="qu_ex2_reps" min="1" value="15"><input type="number" class="set-input" id="qu_ex2_weight" value="0"></div></div>
+        </div>
+
+        <div class="superset-group"><div class="superset-label">Superset 2</div><div class="superset-rest">⏱️ 30 sec rest</div>
+          <div class="exercise-box"><h4>Hack Squat</h4><div class="exercise-label">4 sets x 10 reps</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="qu_ex3_reps" min="1"><input type="number" class="set-input" id="qu_ex3_weight" value="0"></div></div>
+          <div class="exercise-box"><h4>Leg Extension</h4><div class="exercise-label">4 sets x 10 reps • Heavy</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="qu_ex4_reps" min="1"><input type="text" class="set-input" id="qu_ex4_weight" placeholder="Weight"></div></div>
+          <div class="exercise-box"><h4>Air Squats</h4><div class="exercise-label">4 sets x 20 reps</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="qu_ex5_reps" min="1" value="20"><input type="number" class="set-input" id="qu_ex5_weight" value="0"></div></div>
+        </div>
+
+        <div class="form-group"><label>Duration (min)</label><input type="number" id="quadsDuration" min="1" value="60"></div>
+        <div class="form-group"><label>Notes</label><textarea id="quadsNotes" style="height: 80px;"></textarea></div>
+        <button type="submit">✓ Log Quads Workout</button>
+      </form>
+    </div>
+
+    <!-- ARMS FORM -->
+    <div id="armsForm" class="workout-form" style="display: none;">
+      <form onsubmit="logWorkout(event, 'arms')">
+        <div class="form-group"><label>Date & Time</label><input type="datetime-local" id="armsDate" required></div>
+        <div class="timer-display" id="armsTimer">00:00:00</div>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <button type="button" onclick="startTimer('arms')" id="armsStart" style="flex: 1;">▶️ Start</button>
+          <button type="button" onclick="stopTimer('arms')" id="armsStop" style="flex: 1; display: none;">⏹️ Stop</button>
+        </div>
+
+        <div class="superset-group"><div class="superset-label">Superset 1</div><div class="superset-rest">⏱️ 30 sec rest</div>
+          <div class="exercise-box"><h4>Hammer Curls</h4><div class="exercise-label">4 sets x 20 reps • 15 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex1_reps" value="20"><input type="number" class="set-input" id="ar_ex1_weight" value="15"></div></div>
+          <div class="exercise-box"><h4>Brachialis Curl</h4><div class="exercise-label">4 sets x 10 reps/arm • 15 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex2_reps" value="10"><input type="number" class="set-input" id="ar_ex2_weight" value="15"></div></div>
+          <div class="exercise-box"><h4>RB Curls</h4><div class="exercise-label">4 sets x 30 sec • Green</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex3_reps" value="30"><input type="text" class="set-input" id="ar_ex3_weight" value="Green"></div></div>
+          <div class="exercise-box"><h4>Skullcrushers</h4><div class="exercise-label">4 sets x 10 reps • 25 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex4_reps" value="10"><input type="number" class="set-input" id="ar_ex4_weight" value="25"></div></div>
+        </div>
+
+        <div class="superset-group"><div class="superset-label">Superset 2</div><div class="superset-rest">⏱️ 30 sec rest</div>
+          <div class="exercise-box"><h4>V-Bar Pushdown</h4><div class="exercise-label">4 sets x 20 reps • 60 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex5_reps" value="20"><input type="number" class="set-input" id="ar_ex5_weight" value="60"></div></div>
+          <div class="exercise-box"><h4>Underhand Single Arm Pulldown</h4><div class="exercise-label">4 sets x 10 reps/arm • 20 lbs</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex6_reps" value="10"><input type="number" class="set-input" id="ar_ex6_weight" value="20"></div></div>
+          <div class="exercise-box"><h4>RB Pulldown</h4><div class="exercise-label">4 sets x 30 sec</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex7_reps" value="30"><input type="text" class="set-input" id="ar_ex7_weight" placeholder="Band"></div></div>
+          <div class="exercise-box"><h4>Barbell Curl</h4><div class="exercise-label">4 sets x 10 reps • 5 lbs/side</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1-4</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex8_reps" value="10"><input type="number" class="set-input" id="ar_ex8_weight" value="5"></div></div>
+        </div>
+
+        <div class="superset-group"><div class="superset-label">Finisher</div>
+          <div class="exercise-box"><h4>Push-Up Hold</h4><div class="exercise-label">1 set x 30 sec</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex9_reps" value="30"><input type="number" class="set-input" id="ar_ex9_weight" value="0"></div></div>
+          <div class="exercise-box"><h4>Barbell 90° Hold</h4><div class="exercise-label">1 set x 30 sec</div><div class="set-header" onclick="toggleSet(this)"><span>Set 1</span><span>▶</span></div><div class="set-row"><input type="number" class="set-input" id="ar_ex10_reps" value="30"><input type="number" class="set-input" id="ar_ex10_weight" value="0"></div></div>
+        </div>
+
+        <div class="form-group"><label>Duration (min)</label><input type="number" id="armsDuration" min="1" value="60"></div>
+        <div class="form-group"><label>Notes</label><textarea id="armsNotes" style="height: 80px;"></textarea></div>
+        <button type="submit">✓ Log Arms Workout</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="history" class="section">
+    <h2>Workout History</h2>
+    <div class="card"><div id="historyList" style="color: var(--text-secondary); text-align: center;">No workouts logged yet</div></div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'integrityWorkouts';
+let workouts = [];
+let timerSeconds = { back: 0, quads: 0, arms: 0 };
+let timerIntervals = {};
+
+function switchTab(tab) {
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+}
+
+function selectWorkout(type) {
+  ['back', 'quads', 'arms'].forEach(t => {
+    document.getElementById(t + 'Form').style.display = t === type ? 'block' : 'none';
+    document.getElementById(t + 'Btn').style.background = t === type ? 'var(--accent)' : 'var(--card-bg)';
+    document.getElementById(t + 'Btn').style.color = t === type ? 'white' : 'var(--text-primary)';
+  });
+}
+
+function toggleSet(header) {
+  const row = header.nextElementSibling;
+  if (row) {
+    row.classList.toggle('expanded');
+    header.querySelector('span:last-child').textContent = row.classList.contains('expanded') ? '▼' : '▶';
+  }
+}
+
+function startTimer(type) {
+  document.getElementById(type + 'Start').style.display = 'none';
+  document.getElementById(type + 'Stop').style.display = 'block';
+  timerIntervals[type] = setInterval(() => {
+    timerSeconds[type]++;
+    const h = Math.floor(timerSeconds[type] / 3600);
+    const m = Math.floor((timerSeconds[type] % 3600) / 60);
+    const s = timerSeconds[type] % 60;
+    document.getElementById(type + 'Timer').textContent = 
+      String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }, 1000);
+}
+
+function stopTimer(type) {
+  clearInterval(timerIntervals[type]);
+  document.getElementById(type + 'Start').style.display = 'block';
+  document.getElementById(type + 'Stop').style.display = 'none';
+}
+
+function logWorkout(e, type) {
+  e.preventDefault();
+  const date = document.getElementById(type + 'Date').value;
+  const duration = document.getElementById(type + 'Duration').value;
+  const notes = document.getElementById(type + 'Notes').value;
+  
+  const exercises = collectExercises(type);
+  workouts.unshift({ id: Date.now(), date, type, exercises, duration, notes });
+  saveData();
+  updateDashboard();
+  document.querySelector('#' + type + 'Form form').reset();
+  setDefaultDates();
+  alert('✓ Workout logged!');
+}
+
+function collectExercises(type) {
+  const exercises = [];
+  const mapping = {
+    back: ['back_ex1', 'back_ex2', 'back_ex3', 'back_ex4', 'back_ex5'],
+    quads: ['qu_ex1', 'qu_ex2', 'qu_ex3', 'qu_ex4', 'qu_ex5'],
+    arms: ['ar_ex1', 'ar_ex2', 'ar_ex3', 'ar_ex4', 'ar_ex5', 'ar_ex6', 'ar_ex7', 'ar_ex8', 'ar_ex9', 'ar_ex10']
+  };
+  
+  mapping[type].forEach(exId => {
+    const reps = document.getElementById(exId + '_reps').value;
+    const weight = document.getElementById(exId + '_weight').value;
+    if (reps) exercises.push({ reps, weight });
+  });
+  return exercises;
+}
+
+function updateDashboard() {
+  const week = workouts.filter(w => new Date(w.date) >= new Date(Date.now() - 7*24*60*60*1000));
+  document.getElementById('weekCount').textContent = week.length;
+  document.getElementById('totalTime').textContent = workouts.reduce((s, w) => s + parseInt(w.duration || 0), 0);
+  
+  let maxW = 0;
+  workouts.forEach(w => {
+    w.exercises.forEach(ex => {
+      if (ex.weight && parseInt(ex.weight) > maxW) maxW = parseInt(ex.weight);
+    });
+  });
+  document.getElementById('maxWeight').textContent = maxW > 0 ? maxW + ' lbs' : '—';
+  document.getElementById('recentWorkout').innerHTML = workouts.length > 0 
+    ? '<p><strong>' + workouts[0].type.toUpperCase() + '</strong> - ' + new Date(workouts[0].date).toLocaleDateString() + '</p>'
+    : '<p>No workouts yet</p>';
+  
+  const historyList = document.getElementById('historyList');
+  historyList.innerHTML = workouts.length > 0 
+    ? workouts.map(w => '<div style="padding:1rem;border-bottom:1px solid var(--card-border);display:flex;justify-content:space-between"><div><strong>' + w.type.toUpperCase() + '</strong> - ' + new Date(w.date).toLocaleDateString() + ' | ' + w.duration + ' min</div><button onclick="deleteWorkout(' + w.id + ')" style="padding:.25rem .75rem;background:#d32f2f;color:white;border:0;border-radius:4px;cursor:pointer">Delete</button></div>').join('')
+    : '<p>No workouts yet</p>';
+}
+
+function deleteWorkout(id) {
+  if (confirm('Delete this workout?')) {
+    workouts = workouts.filter(w => w.id !== id);
+    saveData();
+    updateDashboard();
+  }
+}
+
+function downloadBackup() {
+  const backup = { timestamp: new Date().toISOString(), workouts };
+  const json = JSON.stringify(backup, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Workout_Backup_' + new Date().toLocaleDateString('en-US').replace(/\//g, '-') + '.json';
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+  document.body.removeChild(a);
+}
+
+function restoreBackup(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const backup = JSON.parse(e.target.result);
+      if (backup.workouts && Array.isArray(backup.workouts)) {
+        workouts = backup.workouts;
+        saveData();
+        updateDashboard();
+        alert('✓ Restored ' + workouts.length + ' workouts!');
+      }
+    } catch (error) {
+      alert('Error reading backup: ' + error.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(workouts));
+}
+
+function loadData() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) workouts = JSON.parse(saved);
+  setDefaultDates();
+  updateDashboard();
+}
+
+function setDefaultDates() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const dt = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+  ['back', 'quads', 'arms'].forEach(t => {
+    const el = document.getElementById(t + 'Date');
+    if (el) el.value = dt;
+  });
+}
+
+loadData();
+</script>
+</body>
+</html>
